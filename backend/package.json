@@ -1,0 +1,21 @@
+{
+  "name": "moments",
+  "version": "1.0.0",
+  "description": "A social media platform to connect, share, and interact with others.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --experimental-json-modules src/index.js"
+  },
+  "author": "Tejas Shinde",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.1"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.0"
+  }
+}
