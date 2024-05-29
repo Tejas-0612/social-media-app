@@ -31,7 +31,6 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      required: true,
       public_id: {
         type: String,
       },
@@ -41,8 +40,6 @@ const userSchema = new Schema(
     },
     bio: {
       type: String,
-      required: true,
-      minlength: 3,
     },
     followers: [
       {
