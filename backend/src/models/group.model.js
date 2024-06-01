@@ -19,6 +19,23 @@ const groupSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    avatar: {
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
+    },
+    coverImage: {
+      // type: String, //cloudinary url
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
+    },
     members: [
       {
         type: Schema.Types.ObjectId,

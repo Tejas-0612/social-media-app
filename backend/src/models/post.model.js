@@ -9,8 +9,9 @@ const postSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ["photo,video,text"],
+      enum: ["photo", "video", "text"],
       required: true,
+      default: "text",
     },
     imageUrl: {
       type: String,
@@ -22,8 +23,7 @@ const postSchema = new Schema(
     },
     hashtags: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Hashtag",
+        type: String,
       },
     ],
     mentions: [
