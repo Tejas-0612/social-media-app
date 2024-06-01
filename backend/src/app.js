@@ -22,6 +22,7 @@ import userRouter from "./routes/user.route.js";
 import postRouter from "./routes/post.route.js";
 import groupRouter from "./routes/group.route.js";
 import likeRouter from "./routes/like.route.js";
+import commentRouter from "./routes/comment.route.js";
 
 // routes declaration
 app.use("/api/v1/healthcheck", healthCheckRouter);
@@ -29,5 +30,6 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/post", postRouter);
 app.use("/api/v1/group", groupRouter);
 app.use("/api/v1/like", likeRouter);
+app.use("/api/v1/comment", commentRouter);
 
 export { app };
