@@ -21,11 +21,13 @@ import healthCheckRouter from "./routes/healthcheck.route.js";
 import userRouter from "./routes/user.route.js";
 import postRouter from "./routes/post.route.js";
 import groupRouter from "./routes/group.route.js";
+import likeRouter from "./routes/like.route.js";
 
 // routes declaration
 app.use("/api/v1/healthcheck", healthCheckRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/post", postRouter);
 app.use("/api/v1/group", groupRouter);
+app.use("/api/v1/like", likeRouter);
 
 export { app };

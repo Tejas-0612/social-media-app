@@ -8,7 +8,7 @@ const likeSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ["Post,Comment"],
+      enum: ["Post", "Comment"],
       required: true,
     },
     postId: {
