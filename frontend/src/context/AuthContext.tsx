@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const INITIAL_USER = {
   id: "",
-  name: "",
+  fullname: "",
   username: "",
   email: "",
   imageUrl: "",
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (currentUser) {
         setUser({
           id: currentUser._id,
-          name: currentUser.name,
+          fullname: currentUser.fullname,
           username: currentUser.username,
           email: currentUser.email,
           imageUrl: currentUser.imageUrl,
@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.getItem("cookieFallback") === "[]" ||
       localStorage.getItem("cookieFallback") === null
     )
-      navigate("/sign-in");
+      navigate("/sign-up");
   }, []);
 
   const value = {
