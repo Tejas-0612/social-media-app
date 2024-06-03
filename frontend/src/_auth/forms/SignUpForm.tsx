@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,13 +18,19 @@ import { toast } from "@/components/ui/use-toast";
 
 import { SignUpValidation } from "@/lib/validation";
 import { useUserContext } from "@/context/AuthContext";
-import { useCreateUserAccount } from "@/lib/react-query/queriesAndMutations";
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from "@/lib/react-query/queriesAndMutations";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+
   const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
     useCreateUserAccount();
+  const { mutateAsync: signInAccount, isPending: isSigningUser } =
+    useSignInAccount();
 
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
@@ -36,12 +43,26 @@ const SignUpForm = () => {
   });
 
   const onSignUp = async (user: z.infer<typeof SignUpValidation>) => {
-    console.log(user);
     try {
       const newUser = await createUserAccount(user);
 
       if (!newUser) {
         toast({ title: "Sign up failed. Please try again." });
+        return;
+      }
+
+      const session = await signInAccount({
+        username: user.username,
+        password: user.password,
+      });
+
+      if (!session) {
+        toast({
+          title: "Something went wrong. Please login your new account",
+        });
+
+        navigate("/sign-in");
+
         return;
       }
 
@@ -51,14 +72,12 @@ const SignUpForm = () => {
         form.reset();
         navigate("/");
       } else {
-        toast({ title: "Login failed. Please try again." });
+        toast({ title: "Sign In failed. Please try again." });
 
         return;
       }
     } catch (error: any) {
-      const { message } = error.response.data;
-      console.log("Error while handling signup", error);
-      toast({ title: message });
+      toast({ title: error.response.data.message });
     }
   };
 
@@ -131,8 +150,11 @@ const SignUpForm = () => {
           />
 
           <Button type="submit" className="shad-button_primary">
-            {isCreatingAccount || isUserLoading ? (
-              <div className="flex-center gap-2">Loading...</div>
+            {isCreatingAccount || isUserLoading || isSigningUser ? (
+              <div className="flex-center gap-2">
+                <Loader2 />
+                Loading...
+              </div>
             ) : (
               "Sign Up"
             )}

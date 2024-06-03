@@ -32,21 +32,24 @@ type IContextType = {
 const AuthContext = createContext<IContextType>(INITIAL_STATE);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
   const [user, setUser] = useState<IUser>(INITIAL_USER);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const checkAuthUser = async () => {
+    setIsLoading(true);
     try {
       const currentUser = await getCurrentUser();
-      if (currentUser) {
+      if (currentUser.data) {
         setUser({
-          id: currentUser._id,
-          fullname: currentUser.fullname,
-          username: currentUser.username,
-          email: currentUser.email,
-          imageUrl: currentUser.imageUrl,
+          id: currentUser.data._id,
+          fullname: currentUser.data.fullname,
+          username: currentUser.data.username,
+          email: currentUser.data.email,
+          imageUrl: currentUser.data?.avatar?.url,
         });
+
         setIsAuthenticated(true);
         return true;
       }
@@ -59,14 +62,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const navigate = useNavigate();
-
   useEffect(() => {
+    const cookieFallback = localStorage.getItem("cookieFallback");
     if (
-      localStorage.getItem("cookieFallback") === "[]" ||
-      localStorage.getItem("cookieFallback") === null
+      cookieFallback === "[]" ||
+      cookieFallback === null ||
+      cookieFallback === undefined
     )
-      navigate("/sign-up");
+      navigate("/sign-in");
+
+    checkAuthUser();
   }, []);
 
   const value = {

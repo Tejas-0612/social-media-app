@@ -21,3 +21,17 @@ export const createUserAccount = async (user: INewUser) => {
     throw error;
   }
 };
+
+export const signInAccount = async (user: {
+  email?: String;
+  password: String;
+  username: String;
+}) => {
+  try {
+    const response = await axios.post("/api/v1/users/login", user);
+    return response.data;
+  } catch (error) {
+    console.log("Error while logging into user account: ", error);
+    throw error;
+  }
+};
