@@ -297,6 +297,20 @@ const getPostsByGroupId = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, posts, "fetched posts sucessfully"));
 });
 
+const getGroupsByUserId = asyncHandler(async (req, res) => {
+  const user = req.user;
+
+  const groups = await Group.find({ admin: user._id });
+
+  if (!groups) {
+    throw new ApiError(400, "Groups are unable to fetch");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, groups, "USer groups fetched successfully"));
+});
+
 export {
   createGroup,
   updateGroup,
@@ -306,4 +320,5 @@ export {
   joinGroup,
   exitGroup,
   getPostsByGroupId,
+  getGroupsByUserId,
 };

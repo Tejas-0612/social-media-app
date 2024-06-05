@@ -28,7 +28,6 @@ const groupSchema = new Schema(
       },
     },
     coverImage: {
-      // type: String, //cloudinary url
       public_id: {
         type: String,
       },

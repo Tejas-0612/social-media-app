@@ -13,6 +13,7 @@ import {
   toggleFollowUser,
   changeCurrentPassword,
   refreshAccessToken,
+  getAllUsers,
 } from "../controllers/user.controller.js";
 
 const router = Router();
@@ -32,5 +33,6 @@ router
 router.route("/change-password").patch(verifyJWT, changeCurrentPassword);
 router.route("/follow/:followingId").patch(verifyJWT, toggleFollowUser);
 router.route("/refresh-token").post(verifyJWT, refreshAccessToken);
+router.route("/all-users").get(verifyJWT, getAllUsers);
 
 export default router;

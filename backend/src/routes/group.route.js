@@ -11,6 +11,7 @@ import {
   joinGroup,
   exitGroup,
   getPostsByGroupId,
+  getGroupsByUserId,
 } from "../controllers/group.controller.js";
 
 const router = Router();
@@ -49,4 +50,6 @@ router.route("/delete/:groupId").delete(deleteGroup);
 router.route("/join/:groupId").patch(joinGroup);
 router.route("/exit/:groupId").patch(exitGroup);
 router.route("/posts/:groupId").get(getPostsByGroupId);
+router.route("/user/groups").get(getGroupsByUserId);
+
 export default router;
