@@ -13,6 +13,32 @@
 }
 
 @layer utilities {
+  /* TYPOGRAPHY */
+  .small-semibold {
+    @apply text-[14px] font-semibold leading-[140%] tracking-tighter;
+  }
+
+  .small-medium {
+    @apply text-[14px] font-medium leading-[140%];
+  }
+
+  .small-regular {
+    @apply text-[14px] font-normal leading-[140%];
+  }
+
+  .subtle-semibold {
+    @apply text-[12px] font-semibold leading-[140%];
+  }
+
+  .tiny-medium {
+    @apply text-[10px] font-medium leading-[140%];
+  }
+
+  /* UTILITIES */
+  .invert-white {
+    @apply invert brightness-0 transition;
+  }
+
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -23,6 +49,25 @@
 
   .flex-start {
     @apply flex justify-start items-center;
+  }
+
+  /* Topbar */
+  .topbar {
+    @apply sticky top-0 my-3 px-2 z-50 md:hidden bg-dark-2 w-full;
+  }
+
+  /* Left sidebar */
+  .leftsidebar {
+    @apply hidden md:flex px-6 py-6 flex-col justify-between min-w-[270px] bg-dark-2;
+  }
+
+  .leftsidebar-link {
+    @apply rounded-lg  hover:bg-primary-500 transition;
+  }
+
+  /* bottom bar */
+  .bottom-bar {
+    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-2 md:hidden;
   }
 }
 

@@ -35,3 +35,13 @@ export const signInAccount = async (user: {
     throw error;
   }
 };
+
+export const signOutAccount = async () => {
+  try {
+    const response = await axios.post("/api/v1/users/logout");
+    return response.data;
+  } catch (error) {
+    console.log("Error while signing out the user account: ", error);
+    throw error;
+  }
+};

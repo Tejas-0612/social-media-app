@@ -7,6 +7,7 @@ import SignUpForm from "./_auth/forms/SignUpForm";
 import SignInForm from "./_auth/forms/SignInForm";
 
 import { Toaster } from "./components/ui/toaster";
+import Home from "./_root/pages/Home";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         </Route>
 
         {/* Private Routes  */}
-        <Route element={<RootLayout />}></Route>
+        <Route element={<RootLayout />}>
+          <Route index element={<Home />} />
+        </Route>
       </Routes>
 
       <Toaster />
