@@ -173,6 +173,30 @@
   .display-btn {
     @apply bg-primary-500 font-semibold;
   }
+
+  .common-container {
+    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
+  }
+
+  .user-container {
+    @apply max-w-5xl flex flex-col items-start w-full gap-6 md:gap-9;
+  }
+
+  .user-grid {
+    @apply w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
+  }
+
+  .user-card {
+    @apply flex-center flex-col gap-4 border border-dark-4 rounded-[20px] px-5 py-8 hover:scale-95;
+  }
+
+  .user-card-img {
+    @apply rounded-full w-14 h-14 ring-2 ring-primary-600 p-[2px];
+  }
+
+  .user-card-info {
+    @apply flex-center flex-col gap-1 *:text-center *:line-clamp-1;
+  }
 }
 
 @layer components {
@@ -200,7 +224,7 @@
   }
 
   .shad-button_dark_4 {
-    @apply h-12 bg-dark-4 px-5 text-light-1 flex gap-2 !important;
+    @apply bg-dark-4 px-5 text-light-1 flex gap-2 !important;
   }
 
   .shad-button_ghost {

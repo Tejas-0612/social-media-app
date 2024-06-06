@@ -19,3 +19,11 @@ export type INavLink = {
   route: string;
   label: string;
 };
+
+export type IUsers = {
+  _id: string;
+  fullname: string;
+  username: string;
+  avatar: { url: string };
+  followers: Array<string>;
+};

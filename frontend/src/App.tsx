@@ -8,6 +8,7 @@ import SignInForm from "./_auth/forms/SignInForm";
 
 import { Toaster } from "./components/ui/toaster";
 import Home from "./_root/pages/Home";
+import AllUsers from "./_root/pages/AllUsers";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         {/* Private Routes  */}
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
+          <Route path="/all-users" element={<AllUsers />} />
         </Route>
       </Routes>
 
