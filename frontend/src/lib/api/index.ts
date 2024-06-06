@@ -45,3 +45,23 @@ export const signOutAccount = async () => {
     throw error;
   }
 };
+
+export const getAllUsers = async () => {
+  try {
+    const response = await axios.get("/api/v1/users/all-users");
+    return response.data;
+  } catch (error) {
+    console.log("Error while getting all users: ", error);
+    throw error;
+  }
+};
+
+export const getAllUserGroups = async () => {
+  try {
+    const response = await axios.get("/api/v1/group/user/groups");
+    return response.data;
+  } catch (error) {
+    console.log("Error while getting all user groups: ", error);
+    throw error;
+  }
+};

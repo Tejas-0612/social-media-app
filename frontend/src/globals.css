@@ -14,6 +14,45 @@
 
 @layer utilities {
   /* TYPOGRAPHY */
+  .h1-bold {
+    @apply text-[36px] font-bold leading-[140%] tracking-tighter;
+  }
+
+  .h1-semibold {
+    @apply text-[36px] font-semibold leading-[140%] tracking-tighter;
+  }
+
+  .h2-bold {
+    @apply text-[30px] font-bold leading-[140%] tracking-tighter;
+  }
+
+  .h3-bold {
+    @apply text-[24px] font-bold leading-[140%] tracking-tighter;
+  }
+
+  .h4-bold {
+    @apply text-[20px] font-bold leading-[140%] tracking-tighter;
+  }
+
+  .base-semibold {
+    @apply text-[16px] font-semibold leading-[140%] tracking-tighter;
+  }
+
+  .base-medium {
+    @apply text-[16px] font-medium leading-[140%];
+  }
+
+  .base-regular {
+    @apply text-[16px] font-normal leading-[140%];
+  }
+
+  .body-bold {
+    @apply text-[18px] font-bold leading-[140%];
+  }
+
+  .body-medium {
+    @apply text-[18px] font-medium leading-[140%];
+  }
   .small-semibold {
     @apply text-[14px] font-semibold leading-[140%] tracking-tighter;
   }
@@ -51,6 +90,29 @@
     @apply flex justify-start items-center;
   }
 
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #09090a;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #5c5c7b;
+    border-radius: 50px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7878a3;
+  }
+
+  .page-title {
+    @apply h3-bold md:h2-bold text-left w-full;
+  }
+
   /* Topbar */
   .topbar {
     @apply sticky top-0 my-3 px-2 z-50 md:hidden bg-dark-2 w-full;
@@ -68,6 +130,48 @@
   /* bottom bar */
   .bottom-bar {
     @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-2 md:hidden;
+  }
+
+  /* Home */
+  .home-container {
+    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14;
+  }
+
+  .home-posts {
+    @apply max-w-screen-sm flex flex-col items-center w-full gap-6 md:gap-9;
+  }
+
+  .home-right-con {
+    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-4 gap-10 my-4;
+  }
+
+  .home-nav {
+    @apply flex items-center gap-4 flex-row-reverse mx-2 pr-10;
+  }
+
+  .home-icons {
+    @apply w-8 h-8;
+  }
+
+  .home-user-icon {
+    @apply ring-2 ring-primary-600 rounded-full w-11 h-11;
+  }
+
+  .homer-recommended {
+    @apply flex flex-col gap-10 overflow-scroll custom-scrollbar;
+  }
+
+  /* Display cards  */
+  .display-container {
+    @apply pr-8 flex-between gap-4;
+  }
+
+  .display-card-img {
+    @apply w-14 h-14 rounded-full p-[2px] mx-2 ring-1 ring-dark-4;
+  }
+
+  .display-btn {
+    @apply bg-primary-500 font-semibold;
   }
 }
 
