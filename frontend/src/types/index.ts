@@ -27,3 +27,23 @@ export type IUsers = {
   avatar: { url: string };
   followers: Array<string>;
 };
+
+export type IGroups = {
+  _id: string;
+  name: string;
+  username: string;
+  avatar: { url: string };
+  members: Array<string>;
+  admin: { _id: string };
+};
+
+export type IProfileCardProps = {
+  username?: string;
+  _id: string;
+  avatar: { url: string };
+  fullname: string;
+  followers?: Array<string>;
+  currentUserId: string;
+  type: "user" | "group";
+  admin?: { _id: string };
+};

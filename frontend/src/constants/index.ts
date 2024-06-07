@@ -11,7 +11,7 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/assets/icons/group.svg",
-    route: "/groups",
+    route: "/all-groups",
     label: "Groups",
   },
   {
@@ -44,7 +44,7 @@ export const bottombarLinks = [
   },
   {
     imgURL: "/assets/icons/group.svg",
-    route: "/groups",
+    route: "/all-groups",
     label: "Groups",
   },
   {

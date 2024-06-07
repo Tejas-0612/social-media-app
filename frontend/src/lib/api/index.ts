@@ -56,6 +56,16 @@ export const getAllUsers = async () => {
   }
 };
 
+export const getAllGroups = async () => {
+  try {
+    const response = await axios.get("/api/v1/group/");
+    return response.data;
+  } catch (error) {
+    console.log("Error while getting all groups: ", error);
+    throw error;
+  }
+};
+
 export const getAllUserGroups = async () => {
   try {
     const response = await axios.get("/api/v1/group/user/groups");

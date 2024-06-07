@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { INewUser } from "@/types";
 import {
   createUserAccount,
+  getAllGroups,
   getAllUserGroups,
   getAllUsers,
   signInAccount,
@@ -36,6 +37,13 @@ export const useGetAllUsers = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_ALL_USERS],
     queryFn: () => getAllUsers(),
+  });
+};
+
+export const useGetAllGroups = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_ALL_GROUPS],
+    queryFn: () => getAllGroups(),
   });
 };
 
