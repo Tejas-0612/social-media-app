@@ -47,3 +47,46 @@ export type IProfileCardProps = {
   type: "user" | "group";
   admin?: { _id: string };
 };
+
+// Post
+
+export type IPost = {
+  _id: string;
+  authorId: string;
+  type: string;
+  content: string;
+  imageUrl?: string;
+  hashtags: Array<string>;
+  mentions?: Array<string>;
+  groupsId?: string;
+};
+
+export type INewPost = {
+  authorId: string;
+  type?: string;
+  content: string;
+  image?: any;
+  hashtags: Array<string>;
+  mentions?: Array<string>;
+  groupsId?: string;
+};
+
+export type IUpdatePost = {
+  _id: string;
+  content: string;
+  hashtags: Array<string>;
+  mentions: Array<string>;
+};
+
+export type PostFormProps = {
+  post?: IPost;
+  action: "create" | "update";
+};
+
+// Multiselect Component
+export type SelectOption = {
+  value: string;
+  label: string;
+  img?: string;
+  subTitle?: string;
+};

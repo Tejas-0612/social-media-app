@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { INewUser } from "@/types";
+import { INewPost, INewUser, IUpdatePost } from "@/types";
 
 export const getCurrentUser = async () => {
   try {
@@ -72,6 +72,52 @@ export const getAllUserGroups = async () => {
     return response.data;
   } catch (error) {
     console.log("Error while getting all user groups: ", error);
+    throw error;
+  }
+};
+
+export const createPost = async (post: INewPost) => {
+  try {
+    console.log(post);
+    const formData = new FormData();
+    formData.append("authorId", post.authorId);
+    formData.append("content", post.content);
+    post.hashtags.forEach((hashtag) => formData.append("hashtags", hashtag));
+    post?.mentions?.forEach((mention) => formData.append("mentions", mention));
+    if (post.image) {
+      formData.append("image", post.image);
+    }
+
+    console.log(formData);
+    const response = await axios.post("/api/v1/post/create", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("error while creating a new Post:", error);
+    throw error;
+  }
+};
+
+export const updatePost = async (post: IUpdatePost) => {
+  try {
+    const response = await axios.patch(`/api/v1/post/update/${post._id}`, post);
+    return response.data;
+  } catch (error) {
+    console.log("error while updating a post:", error);
+    throw error;
+  }
+};
+
+export const getPostById = async (postId?: string) => {
+  if (!postId) throw Error;
+  try {
+    const response = await axios.get(`/api/v1/post/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting a post by Id:", postId);
     throw error;
   }
 };

@@ -132,6 +132,19 @@
     @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-2 md:hidden;
   }
 
+  /* File uploader */
+  .file_uploader-img {
+    @apply h-80 lg:h-[480px] w-full rounded-[24px] object-cover object-top;
+  }
+
+  .file_uploader-label {
+    @apply text-light-4 text-center small-regular w-full p-4 border-t border-t-dark-4;
+  }
+
+  .file_uploader-box {
+    @apply flex-center flex-col p-7 h-80;
+  }
+
   /* Home */
   .home-container {
     @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14;
@@ -233,5 +246,36 @@
 
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
+  }
+
+  /*  MultiSelect  */
+  .multi-select > div {
+    @apply border-dark-1 bg-dark-4;
+  }
+
+  .multi-select ul > button {
+    @apply border-primary-500 border-2 !important;
+  }
+
+  .multi-select ul > button > div > span {
+    @apply small-regular !important;
+  }
+
+  .multi-select > div > div > div {
+    @apply border-2 border-primary-500 bg-dark-3 rounded-md !important;
+  }
+
+  .multi-select > div > div div > p,
+  .multi-select p {
+    @apply text-primary-500 bg-dark-3 rounded-md small-regular   !important;
+  }
+
+  .multi-select > div > div > div > button {
+    @apply bg-primary-600  rounded-md !important;
+  }
+
+  .multi-select input,
+  ul > button {
+    @apply bg-dark-4 !important;
   }
 }

@@ -10,6 +10,8 @@ import { Toaster } from "./components/ui/toaster";
 import Home from "./_root/pages/Home";
 import AllUsers from "./_root/pages/AllUsers";
 import AllGroups from "./_root/pages/AllGroups";
+import CreatePost from "./_root/pages/CreatePost";
+import EditPost from "./_root/pages/EditPost";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="/all-users" element={<AllUsers />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/edit/:postId" element={<EditPost />} />
           <Route path="/all-groups" element={<AllGroups />} />
         </Route>
       </Routes>

@@ -34,7 +34,7 @@ const AllGroups = () => {
         ) : (
           <ul className="profile-card-grid">
             {!isUserLoading &&
-              groups.data.map((group: IGroups) => (
+              groups?.data.map((group: IGroups) => (
                 <li key={group._id} className="profile-card-con">
                   <ProfileCard
                     _id={group._id}
