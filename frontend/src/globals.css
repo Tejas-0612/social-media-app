@@ -147,7 +147,7 @@
 
   /* Home */
   .home-container {
-    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14;
+    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14 overflow-scroll custom-scrollbar;
   }
 
   .home-posts {
@@ -155,7 +155,7 @@
   }
 
   .home-right-con {
-    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-4 gap-10 my-4;
+    @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-4 gap-10 my-4 bg-dark-2;
   }
 
   .home-nav {
@@ -170,8 +170,8 @@
     @apply ring-2 ring-primary-600 rounded-full w-11 h-11;
   }
 
-  .homer-recommended {
-    @apply flex flex-col gap-10 overflow-scroll custom-scrollbar;
+  .home-recommended {
+    @apply flex flex-col gap-10 overflow-scroll custom-scrollbar !important;
   }
 
   /* Display cards  */
@@ -187,9 +187,54 @@
     @apply bg-primary-500 font-semibold;
   }
 
+  /* Post Details */
+  .post_details-container {
+    @apply flex flex-col flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar items-center;
+  }
+
+  .post_details-card {
+    @apply bg-dark-2 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border border-dark-4 xl:rounded-l-[24px];
+  }
+
+  .post_details-img {
+    @apply h-80 lg:h-[480px] xl:w-[48%] rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-dark-1;
+  }
+
+  .post_details-info {
+    @apply bg-dark-2 flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+  }
+
+  .post_details-delete_btn {
+    @apply p-0 flex gap-3 hover:bg-transparent hover:text-light-1  text-light-1 small-medium lg:base-medium;
+  }
+
+  /* Post Card */
+  .post-card {
+    @apply bg-dark-2 rounded-3xl border border-dark-4 p-5 lg:p-7 w-full max-w-screen-sm;
+  }
+
+  .post-card_img {
+    @apply h-64 xs:h-[400px] lg:h-[450px] w-full rounded-[24px] object-cover mb-5;
+  }
+
+  /* Comment card */
+  .comment-card {
+    @apply flex gap-2 mt-8;
+  }
+
+  .comment-card > img {
+    @apply rounded-full w-10 h-10 ring-2 ring-dark-4;
+  }
+
+  .comment-card > form {
+    @apply flex items-center shad-input2 *:border-none *:bg-dark-4 rounded-lg h-10 w-full;
+  }
+
   .common-container {
     @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
   }
+
+  /* Profile card */
 
   .profile-container {
     @apply max-w-5xl flex flex-col items-start w-full gap-6 md:gap-9;
@@ -229,6 +274,10 @@
 
   .shad-input {
     @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-light-3 !important;
+  }
+
+  .shad-input2 {
+    @apply h-10 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-0  !important;
   }
 
   .shad-textarea {

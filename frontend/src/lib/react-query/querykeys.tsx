@@ -6,4 +6,7 @@ export enum QUERY_KEYS {
 
   // POST KEYS
   GET_POST_BY_ID = "getPostById",
+  GET_ALL_POSTS = "getAllPosts",
+  GET_POST_LIKES = "getPostLikes",
+  GET_POST_LIKES_BY_USER_ID = "getPostLikesByUserId",
 }

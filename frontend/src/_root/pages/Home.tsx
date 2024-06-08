@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 
+import { IGroups, IPost, IUsers } from "@/types";
 import {
-  useGetAllUserGroups,
+  useGetAllPosts,
   useGetAllUsers,
+  useGetAllUserGroups,
 } from "@/lib/react-query/queriesAndMutations";
-import Loader from "@/components/shared/Loader";
 import { useUserContext } from "@/context/AuthContext";
+import Loader from "@/components/shared/Loader";
 import DisplayCard from "@/components/shared/DisplayCard";
+import PostCard from "@/components/shared/PostCard";
 
 const Home = () => {
   const {
@@ -21,6 +24,8 @@ const Home = () => {
     isSuccess: isGroupSuccess,
   } = useGetAllUserGroups();
 
+  const { data: posts, isPending: isPostsPending } = useGetAllPosts();
+
   const { user } = useUserContext();
 
   if (isUsersLoading || isGroupsLoading) {
@@ -31,10 +36,22 @@ const Home = () => {
     <div className="flex flex-1">
       <div className="home-container">
         <div className="home-posts">
-          <h2 className="page-title flex gap-2 invert-white">
+          <h2 className="page-title">
             <img src={"/assets/icons/home.svg"} width={36} height={36} />
             Home Feed
           </h2>
+
+          {isPostsPending && !posts ? (
+            <Loader />
+          ) : (
+            <ul className="flex flex-col flex-1 gap-9 w-full ">
+              {posts.data.map((post: IPost) => (
+                <li key={post._id} className="flex justify-center w-full">
+                  <PostCard post={post} />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
 
@@ -63,32 +80,43 @@ const Home = () => {
         <div className="home-recommended">
           <div>
             <h1 className="h4-bold">Your Groups</h1>
-            {isGroupSuccess &&
-              allUserGroups?.data.map(({ _id, avatar, name, members }: any) => (
-                <DisplayCard
-                  _id={_id}
-                  avatar={avatar?.url}
-                  name={name}
-                  type="group"
-                  members={members}
-                />
-              ))}
+            <ul>
+              {isGroupSuccess &&
+                allUserGroups?.data.map(
+                  ({ _id, avatar, name, members }: IGroups) => (
+                    <li key={_id}>
+                      <DisplayCard
+                        _id={_id}
+                        avatar={avatar?.url}
+                        name={name}
+                        type="group"
+                        members={members}
+                      />
+                    </li>
+                  )
+                )}
+            </ul>
           </div>
 
           <div>
             <h1 className="h4-bold">Top Creators</h1>
-            {isSuccess &&
-              allUsers?.data
-                .filter((user: { avatar: string }) => user.avatar)
-                .map(({ _id, username, avatar, fullname }: any) => (
-                  <DisplayCard
-                    _id={_id}
-                    name={fullname}
-                    avatar={avatar.url}
-                    type="creator"
-                    username={username}
-                  />
-                ))}
+            <ul>
+              {" "}
+              {isSuccess &&
+                allUsers?.data
+                  .filter((user: { avatar: string }) => user.avatar)
+                  .map(({ _id, username, avatar, fullname }: IUsers) => (
+                    <li key={_id}>
+                      <DisplayCard
+                        _id={_id}
+                        name={fullname}
+                        avatar={avatar.url}
+                        type="creator"
+                        username={username}
+                      />
+                    </li>
+                  ))}
+            </ul>
           </div>
         </div>
       </div>

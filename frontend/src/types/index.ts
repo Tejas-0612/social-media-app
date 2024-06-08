@@ -52,13 +52,16 @@ export type IProfileCardProps = {
 
 export type IPost = {
   _id: string;
-  authorId: string;
+  authorId: { avatar: { url: string }; username: string; _id: string };
   type: string;
   content: string;
   imageUrl?: string;
   hashtags: Array<string>;
   mentions?: Array<string>;
   groupsId?: string;
+  createdAt: string;
+  likes: Array<string>;
+  comments: Array<string>;
 };
 
 export type INewPost = {

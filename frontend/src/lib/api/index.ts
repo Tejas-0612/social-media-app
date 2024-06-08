@@ -121,3 +121,62 @@ export const getPostById = async (postId?: string) => {
     throw error;
   }
 };
+
+export const getAllPosts = async () => {
+  try {
+    const response = await axios.get("/api/v1/post");
+    return response.data;
+  } catch (error) {
+    console.log("error while getting all posts", error);
+    throw error;
+  }
+};
+
+export const togglePostLike = async (postId: string) => {
+  try {
+    const response = await axios.patch(`/api/v1/like/post/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error getting while liking a post", error);
+    throw error;
+  }
+};
+
+export const getAllLikedPostsByUserId = async (userId: string) => {
+  try {
+    const response = await axios.get(`/api/v1/like/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error getting while liking a post", error);
+    throw error;
+  }
+};
+
+export const getPostLikes = async (postId: string) => {
+  try {
+    const response = await axios.get(`/api/v1/like/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting post likes", error);
+    throw error;
+  }
+};
+
+export const addComment = async ({
+  postId,
+  content,
+}: {
+  postId: string;
+  content: string;
+}) => {
+  console.log(postId, content);
+  try {
+    const response = await axios.post(`/api/v1/comment/add/${postId}`, {
+      content,
+    });
+    return response.data;
+  } catch (error) {
+    console.log("error while adding a comment", error);
+    throw error;
+  }
+};

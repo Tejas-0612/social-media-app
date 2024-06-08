@@ -2,21 +2,23 @@ import { Link } from "react-router-dom";
 
 import { Button } from "../ui/button";
 
+type displayCardProps = {
+  _id: string;
+  username?: string;
+  avatar: string;
+  name: string;
+  type: string;
+  members?: Array<string>;
+};
+
 const DisplayCard = ({
   _id,
   name,
   username = "",
   avatar,
-  members = "",
+  members = [""],
   type,
-}: {
-  _id: String;
-  username?: String;
-  avatar: string;
-  name: String;
-  type: String;
-  members?: String;
-}) => {
+}: displayCardProps) => {
   const isCreator = type === "creator";
   const memberCount = members.length;
   const memberText = memberCount > 1 ? "members" : "member";

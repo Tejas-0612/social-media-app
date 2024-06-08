@@ -47,7 +47,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           fullname: currentUser.data.fullname,
           username: currentUser.data.username,
           email: currentUser.data.email,
-          imageUrl: currentUser.data?.avatar?.url,
+          imageUrl:
+            currentUser.data.avatar.url ||
+            "/assets/icons/profile-placeholder.svg",
         });
 
         setIsAuthenticated(true);

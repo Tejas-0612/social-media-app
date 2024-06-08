@@ -1,14 +1,19 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import {
+  addComment,
   createPost,
   createUserAccount,
   getAllGroups,
+  getAllLikedPostsByUserId,
+  getAllPosts,
   getAllUserGroups,
   getAllUsers,
   getPostById,
+  getPostLikes,
   signInAccount,
   signOutAccount,
+  togglePostLike,
   updatePost,
 } from "../api";
 import { QUERY_KEYS } from "./querykeys";
@@ -80,5 +85,45 @@ export const useGetPostById = (postId?: string) => {
     queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
     queryFn: () => getPostById(postId),
     enabled: !!postId,
+  });
+};
+
+export const useGetAllPosts = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_ALL_POSTS],
+    queryFn: () => getAllPosts(),
+  });
+};
+
+// Like Queries
+
+export const useTogglePostLike = () => {
+  return useMutation({
+    mutationFn: ({ postId }: { postId: string }) => togglePostLike(postId),
+  });
+};
+
+export const useGetAllLikedPostsByUserId = (postId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_POST_LIKES_BY_USER_ID, postId],
+    queryFn: () => getAllLikedPostsByUserId(postId),
+    enabled: !!postId,
+  });
+};
+
+export const useGetPostLikes = (postId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_POST_LIKES, postId],
+    queryFn: () => getPostLikes(postId),
+    enabled: !!postId,
+  });
+};
+
+// Comment Queries
+
+export const useAddComment = () => {
+  return useMutation({
+    mutationFn: ({ postId, content }: { postId: string; content: string }) =>
+      addComment({ postId, content }),
   });
 };
