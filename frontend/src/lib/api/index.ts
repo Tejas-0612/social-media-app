@@ -56,6 +56,27 @@ export const getAllUsers = async () => {
   }
 };
 
+export const getUserById = async (userId: string) => {
+  try {
+    const response = await axios.get(`/api/v1/users/profile/${userId}`);
+    return response.data.data;
+  } catch (error) {
+    console.log("error while getting a user", error);
+    throw error;
+  }
+};
+
+export const toggleFollowUser = async (followingId: string) => {
+  if (!followingId) throw Error;
+  try {
+    const response = await axios.patch(`/api/v1/users/follow/${followingId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while following user", error);
+    throw error;
+  }
+};
+
 export const getAllGroups = async () => {
   try {
     const response = await axios.get("/api/v1/group/");
@@ -132,6 +153,17 @@ export const getAllPosts = async () => {
   }
 };
 
+export const getAllUserPosts = async (authorId: string) => {
+  if (!authorId) throw Error;
+  try {
+    const response = await axios.get(`/api/v1/post/user/${authorId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting user posts", error);
+    throw error;
+  }
+};
+
 export const togglePostLike = async (postId: string) => {
   try {
     const response = await axios.patch(`/api/v1/like/post/${postId}`);
@@ -143,8 +175,9 @@ export const togglePostLike = async (postId: string) => {
 };
 
 export const getAllLikedPostsByUserId = async (userId: string) => {
+  if (!userId) throw Error;
   try {
-    const response = await axios.get(`/api/v1/like/user/${userId}`);
+    const response = await axios.post(`/api/v1/like/user/${userId}`);
     return response.data;
   } catch (error) {
     console.log("Error getting while liking a post", error);

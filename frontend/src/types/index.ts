@@ -7,6 +7,22 @@ export type IUser = {
   bio?: string;
 };
 
+export type profileUser = {
+  _id: string;
+  fullname: string;
+  username: string;
+  bio: string;
+  avatar: { url: string };
+  followers: Array<userDetails>;
+  following: Array<userDetails>;
+};
+
+export type userDetails = {
+  _id: string;
+  avatar: { url: string };
+  username: string;
+};
+
 export type INewUser = {
   fullname: string;
   email: string;

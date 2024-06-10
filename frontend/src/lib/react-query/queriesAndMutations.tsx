@@ -8,11 +8,15 @@ import {
   getAllLikedPostsByUserId,
   getAllPosts,
   getAllUserGroups,
+  getAllUserPosts,
   getAllUsers,
+  getCurrentUser,
   getPostById,
   getPostLikes,
+  getUserById,
   signInAccount,
   signOutAccount,
+  toggleFollowUser,
   togglePostLike,
   updatePost,
 } from "../api";
@@ -47,6 +51,20 @@ export const useGetAllUsers = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_ALL_USERS],
     queryFn: () => getAllUsers(),
+  });
+};
+
+export const useGetUserById = (userId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
+    queryFn: () => getUserById(userId),
+    enabled: !!userId,
+  });
+};
+
+export const useToggleFollowUser = () => {
+  return useMutation({
+    mutationFn: (followingId: string) => toggleFollowUser(followingId),
   });
 };
 
@@ -88,6 +106,14 @@ export const useGetPostById = (postId?: string) => {
   });
 };
 
+export const useGetUserPosts = (authorId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_ALL_POST_BY_USER_ID, authorId],
+    queryFn: () => getAllUserPosts(authorId),
+    enabled: !!authorId,
+  });
+};
+
 export const useGetAllPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_ALL_POSTS],
@@ -103,11 +129,11 @@ export const useTogglePostLike = () => {
   });
 };
 
-export const useGetAllLikedPostsByUserId = (postId: string) => {
+export const useGetAllLikedPostsByUserId = (userId: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_POST_LIKES_BY_USER_ID, postId],
-    queryFn: () => getAllLikedPostsByUserId(postId),
-    enabled: !!postId,
+    queryKey: [QUERY_KEYS.GET_POST_LIKES_BY_USER_ID, userId],
+    queryFn: () => getAllLikedPostsByUserId(userId),
+    enabled: !!userId,
   });
 };
 
