@@ -23,7 +23,7 @@ const AllUsers = () => {
 
   return (
     <div className="common-container">
-      <div className="profile-container">
+      <div className="user-container">
         <h2 className="page-title">
           <img src={"/assets/icons/people.svg"} width={36} height={36} />
           All Users
@@ -31,7 +31,7 @@ const AllUsers = () => {
         {isCreators && !creators ? (
           <Loader />
         ) : (
-          <ul className="profile-card-grid">
+          <ul className="user-grid">
             {!isUserLoading &&
               creators.data
                 .filter((user: IUsers) => user._id !== currentUser.id)

@@ -14,6 +14,7 @@ import CreatePost from "./_root/pages/CreatePost";
 import EditPost from "./_root/pages/EditPost";
 import Profile from "./_root/pages/Profile";
 import UpdateProfile from "./_root/pages/UpdateProfile";
+import Explore from "./_root/pages/Explore";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/edit/:postId" element={<EditPost />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/update-profile/:userId" element={<UpdateProfile />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/all-groups" element={<AllGroups />} />
         </Route>
       </Routes>

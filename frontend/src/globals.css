@@ -113,6 +113,14 @@
     @apply h3-bold md:h2-bold text-left w-full  flex gap-2 invert-white;
   }
 
+  .user-container {
+    @apply max-w-5xl flex flex-col items-start w-full gap-6 md:gap-9;
+  }
+
+  .user-grid {
+    @apply w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
+  }
+
   /* Topbar */
   .topbar {
     @apply sticky top-0 my-3 px-2 z-50 md:hidden bg-dark-2 w-full;
@@ -295,7 +303,7 @@
   }
 
   .grid-post_user {
-    @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px] gap-2;
+    @apply absolute bottom-0 p-3 flex-between w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px] gap-9;
   }
   .grid-post_user2 {
     @apply absolute bottom-0 p-5 flex w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px];

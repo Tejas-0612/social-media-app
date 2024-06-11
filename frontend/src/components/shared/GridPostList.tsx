@@ -38,7 +38,7 @@ const GridPostList = ({
                 <div className="flex items-center justify-start gap-2 flex-1">
                   <img
                     src={
-                      post.authorId.avatar.url ||
+                      post.authorId?.avatar?.url ||
                       "/assets/icons/profile-placeholder.svg"
                     }
                     alt="creator"

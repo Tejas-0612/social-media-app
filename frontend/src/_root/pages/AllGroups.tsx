@@ -24,15 +24,17 @@ const AllGroups = () => {
 
   return (
     <div className="common-container">
-      <div className="profile-container">
-        <h2 className="page-title">
-          <img src={"/assets/icons/group.svg"} width={36} height={36} />
-          All Groups
-        </h2>
+      <div className="user-container">
+        <div className="max-w-5xl flex-start flex-col gap-3 justify-start w-full">
+          <h2 className="page-title">
+            <img src={"/assets/icons/group.svg"} width={36} height={36} />
+            All Groups
+          </h2>
+        </div>
         {!isGroups && !groups ? (
           <Loader />
         ) : (
-          <ul className="profile-card-grid">
+          <ul className="user-grid">
             {!isUserLoading &&
               groups?.data.map((group: IGroups) => (
                 <li key={group._id} className="profile-card-con">
