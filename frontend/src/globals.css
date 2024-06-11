@@ -297,6 +297,9 @@
   .grid-post_user {
     @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px] gap-2;
   }
+  .grid-post_user2 {
+    @apply absolute bottom-0 p-5 flex w-full bg-gradient-to-t from-dark-3 to-transparent rounded-b-[24px];
+  }
 
   .profile-tabs-list {
     @apply bg-dark-3 data-[state=active]:bg-dark-4 rounded-lg my-6;

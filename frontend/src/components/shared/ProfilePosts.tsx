@@ -3,6 +3,8 @@ import Loader from "@/components/shared/Loader";
 import GridPostList from "@/components/shared/GridPostList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetAllLikedPostsByUserId } from "@/lib/react-query/queriesAndMutations";
+import GridTextPostList from "./GridTextPostList";
+import { useUserContext } from "@/context/AuthContext";
 
 type ProfilePostsProps = {
   userId: string | undefined;
@@ -13,14 +15,24 @@ type ProfilePostsProps = {
 const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
   const { data: likedPosts, isPending: isLikedPostPending } =
     useGetAllLikedPostsByUserId(userId!);
-
+  const { user: currentUser } = useUserContext();
   return (
     <Tabs defaultValue="posts" className="w-full">
       <TabsList className="profile-tabs-list">
-        <TabsTrigger value="posts" className="profile-tabs-trigger ">
+        <TabsTrigger value="photo" className="profile-tabs-trigger ">
           <img
             src={"/assets/icons/posts.svg"}
             alt="posts"
+            width={20}
+            height={20}
+          />
+          Posts
+        </TabsTrigger>
+
+        <TabsTrigger value="text" className="profile-tabs-trigger">
+          <img
+            src={"/assets/icons/text.svg"}
+            alt="save"
             width={20}
             height={20}
           />
@@ -35,7 +47,12 @@ const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
           />
           Liked Posts
         </TabsTrigger>
-        <TabsTrigger value="saved" className="profile-tabs-trigger">
+        <TabsTrigger
+          value="saved"
+          className={`profile-tabs-trigger ${
+            userId !== currentUser.id && "hidden"
+          }`}
+        >
           <img
             src={"/assets/icons/save.svg"}
             alt="save"
@@ -45,11 +62,18 @@ const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
           Saved Posts
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="posts">
+      <TabsContent value="photo">
         {isPostsPending ? (
           <Loader />
         ) : (
           <GridPostList posts={posts} showStats={false} showUser={false} />
+        )}
+      </TabsContent>
+      <TabsContent value="text">
+        {isLikedPostPending ? (
+          <Loader />
+        ) : (
+          <GridTextPostList posts={posts} showStats={false} showUser={false} />
         )}
       </TabsContent>
       <TabsContent value="liked">
