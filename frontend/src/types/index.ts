@@ -30,6 +30,14 @@ export type INewUser = {
   password: string;
 };
 
+export type IUpdateUser = {
+  fullname?: string;
+  bio?: string;
+};
+export type IUpdateUserAvatar = {
+  avatar: string;
+};
+
 export type INavLink = {
   imgURL: string;
   route: string;

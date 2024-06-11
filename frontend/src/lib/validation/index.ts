@@ -31,3 +31,15 @@ export const PostValidation = z.object({
   mentions: z.array(z.string()).optional(),
   image: z.any(),
 });
+
+export const ProfileValidation = z.object({
+  fullname: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters." }),
+  username: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email(),
+  bio: z.string(),
+  imageUrl: z.any(),
+});

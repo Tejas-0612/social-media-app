@@ -10,7 +10,6 @@ import {
   getAllUserGroups,
   getAllUserPosts,
   getAllUsers,
-  getCurrentUser,
   getPostById,
   getPostLikes,
   getUserById,
@@ -19,9 +18,11 @@ import {
   toggleFollowUser,
   togglePostLike,
   updatePost,
+  updateUserAvatar,
+  updateUserInfo,
 } from "../api";
 import { QUERY_KEYS } from "./querykeys";
-import { INewPost, INewUser, IUpdatePost } from "@/types";
+import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
 
 // User Queries
 
@@ -68,6 +69,17 @@ export const useToggleFollowUser = () => {
   });
 };
 
+export const useUpdateUserInfo = () => {
+  return useMutation({
+    mutationFn: (user: IUpdateUser) => updateUserInfo(user),
+  });
+};
+
+export const useUpdateUserAvatar = () => {
+  return useMutation({
+    mutationFn: (avatar: string) => updateUserAvatar(avatar),
+  });
+};
 // Group Queries
 
 export const useGetAllGroups = () => {

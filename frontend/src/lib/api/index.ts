@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { INewPost, INewUser, IUpdatePost } from "@/types";
+import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
 
 export const getCurrentUser = async () => {
   try {
@@ -73,6 +73,36 @@ export const toggleFollowUser = async (followingId: string) => {
     return response.data;
   } catch (error) {
     console.log("error while following user", error);
+    throw error;
+  }
+};
+
+export const updateUserInfo = async (user: IUpdateUser) => {
+  try {
+    const response = await axios.patch(`/api/v1/users/update-profile`, user);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting user details", error);
+    throw error;
+  }
+};
+
+export const updateUserAvatar = async (avatar: any) => {
+  try {
+    const formData = new FormData();
+    formData.append("avatar", avatar);
+    const response = await axios.patch(
+      "/api/v1/users/update-avatar",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log("error while updating a user's avatar", error);
     throw error;
   }
 };

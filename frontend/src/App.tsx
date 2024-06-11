@@ -13,6 +13,7 @@ import AllGroups from "./_root/pages/AllGroups";
 import CreatePost from "./_root/pages/CreatePost";
 import EditPost from "./_root/pages/EditPost";
 import Profile from "./_root/pages/Profile";
+import UpdateProfile from "./_root/pages/UpdateProfile";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/edit/:postId" element={<EditPost />} />
           <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/update-profile/:userId" element={<UpdateProfile />} />
           <Route path="/all-groups" element={<AllGroups />} />
         </Route>
       </Routes>
