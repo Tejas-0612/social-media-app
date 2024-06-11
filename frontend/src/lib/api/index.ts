@@ -243,3 +243,16 @@ export const addComment = async ({
     throw error;
   }
 };
+
+// Notifications
+
+export const getUserNotifications = async (userId: string) => {
+  try {
+    console.log(userId);
+    const response = await axios.get(`/api/v1/notification/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting user notifications", error);
+    throw error;
+  }
+};

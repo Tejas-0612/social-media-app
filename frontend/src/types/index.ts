@@ -117,3 +117,12 @@ export type SelectOption = {
   img?: string;
   subTitle?: string;
 };
+
+export type INotification = {
+  _id?: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+  type: string;
+  user: { avatar: { url: string } };
+};

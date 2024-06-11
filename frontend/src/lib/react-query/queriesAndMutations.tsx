@@ -13,6 +13,7 @@ import {
   getPostById,
   getPostLikes,
   getUserById,
+  getUserNotifications,
   signInAccount,
   signOutAccount,
   toggleFollowUser,
@@ -80,6 +81,7 @@ export const useUpdateUserAvatar = () => {
     mutationFn: (avatar: string) => updateUserAvatar(avatar),
   });
 };
+
 // Group Queries
 
 export const useGetAllGroups = () => {
@@ -163,5 +165,14 @@ export const useAddComment = () => {
   return useMutation({
     mutationFn: ({ postId, content }: { postId: string; content: string }) =>
       addComment({ postId, content }),
+  });
+};
+
+// Notification Queries
+
+export const useGetUserNotifications = (userId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_NOTIFICATIONS],
+    queryFn: () => getUserNotifications(userId),
   });
 };

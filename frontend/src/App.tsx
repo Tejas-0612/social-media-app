@@ -15,6 +15,7 @@ import EditPost from "./_root/pages/EditPost";
 import Profile from "./_root/pages/Profile";
 import UpdateProfile from "./_root/pages/UpdateProfile";
 import Explore from "./_root/pages/Explore";
+import Notifications from "./_root/pages/Notifications";
 
 function App() {
   return (
@@ -31,11 +32,12 @@ function App() {
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="/all-users" element={<AllUsers />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/edit/:postId" element={<EditPost />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/update-profile/:userId" element={<UpdateProfile />} />
-          <Route path="/explore" element={<Explore />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/all-groups" element={<AllGroups />} />
         </Route>
       </Routes>

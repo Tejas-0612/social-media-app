@@ -68,7 +68,7 @@ const Home = () => {
             <img src="/assets/icons/setting.svg" className="home-icons" />
           </Link>
 
-          <Link to={`/user/${user.id}/notifications`}>
+          <Link to={`/notifications`}>
             <img src="/assets/icons/notification.svg" className="home-icons" />
           </Link>
 

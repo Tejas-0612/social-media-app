@@ -11,4 +11,7 @@ export enum QUERY_KEYS {
   GET_ALL_POSTS = "getAllPosts",
   GET_POST_LIKES = "getPostLikes",
   GET_POST_LIKES_BY_USER_ID = "getPostLikesByUserId",
+
+  //  Notification Keys
+  GET_USER_NOTIFICATIONS = "getUserNotifications",
 }
