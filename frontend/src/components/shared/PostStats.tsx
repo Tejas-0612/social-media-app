@@ -6,6 +6,8 @@ import { toast } from "../ui/use-toast";
 import {
   useTogglePostLike,
   useGetPostLikes,
+  useToggleSavePost,
+  useGetUserById,
 } from "@/lib/react-query/queriesAndMutations";
 
 type PostStatsProps = {
@@ -19,10 +21,12 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
   const { data: postLikes, isFetched: isLikesFetched } = useGetPostLikes(
     post._id
   );
+  const { data: user, isSuccess: isUser } = useGetUserById(userId);
 
   const [likes, setLikes] = useState<string[]>([]);
-
+  const [isSaved, setIsSaved] = useState<boolean>();
   const { mutate: toggleLikePost } = useTogglePostLike();
+  const { mutateAsync: savePost } = useToggleSavePost();
 
   useEffect(() => {
     if (isLikesFetched && postLikes) {
@@ -47,19 +51,38 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
     toggleLikePost({ postId: post._id });
   };
 
+  const handleSave = async () => {
+    const toggleSavePost = await savePost(post._id);
+    if (!toggleSavePost?.data) {
+      setIsSaved(false);
+      toast({ title: "post unsaved" });
+    } else {
+      setIsSaved(true);
+
+      toast({ title: "post saved" });
+    }
+  };
+
   const handleShare = async () => {
     await navigator.clipboard.writeText(`/post/:${post._id}`);
 
     toast({ title: "link copied to clipboard" });
   };
 
-  const containerStyles = location.pathname.startsWith("/profile")
-    ? "w-full"
-    : "";
+  const isSavedPost = isUser && user.savedPosts.includes(post._id);
+  useEffect(() => {
+    setIsSaved(!!isSavedPost);
+  }, []);
+
+  const containerStyles =
+    location.pathname.startsWith("/profile") ||
+    location.pathname.startsWith("/saved")
+      ? "w-full"
+      : "";
 
   return (
     <div
-      className={`flex justify-between items-center z-20 ${containerStyles}`}
+      className={` flex justify-between items-center z-20 ${containerStyles}`}
     >
       <div className="flex gap-2">
         <div className="flex gap-2 mr-5">
@@ -90,16 +113,26 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
             {post?.comments?.length}
           </p>
         </div>
+        <div className="flex gap-2 mr-5">
+          <img
+            src={"/assets/icons/share.svg"}
+            alt="share"
+            width={20}
+            height={20}
+            className="cursor-pointer"
+            onClick={handleShare}
+          />
+        </div>
       </div>
 
-      <div className="flex gap-2 mr-5">
+      <div className="flex gap-2">
         <img
-          src={"/assets/icons/share.svg"}
-          alt="share"
+          src={isSaved ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
+          alt="save"
           width={20}
           height={20}
           className="cursor-pointer"
-          onClick={handleShare}
+          onClick={handleSave}
         />
       </div>
     </div>

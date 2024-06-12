@@ -18,12 +18,15 @@ import {
   signOutAccount,
   toggleFollowUser,
   togglePostLike,
+  toggleSavePost,
   updatePost,
   updateUserAvatar,
   updateUserInfo,
+  userSavedPosts,
 } from "../api";
 import { QUERY_KEYS } from "./querykeys";
 import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
+import { string } from "zod";
 
 // User Queries
 
@@ -156,6 +159,19 @@ export const useGetPostLikes = (postId: string) => {
     queryKey: [QUERY_KEYS.GET_POST_LIKES, postId],
     queryFn: () => getPostLikes(postId),
     enabled: !!postId,
+  });
+};
+
+export const useToggleSavePost = () => {
+  return useMutation({
+    mutationFn: (postId: string) => toggleSavePost(postId),
+  });
+};
+
+export const useUserSavedPosts = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_ALL_SAVED_POSTS],
+    queryFn: () => userSavedPosts(),
   });
 };
 

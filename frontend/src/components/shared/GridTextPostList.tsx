@@ -29,7 +29,7 @@ const GridTextPostList = ({
               <Link to={`/posts/${post._id}`} className="">
                 <div
                   className={`grid-post_link small-medium lg:base-medium flex flex-col items-center ${
-                    showUser ? "py-8" : "justify-center"
+                    showUser || showStats ? "py-8" : "justify-center"
                   }`}
                 >
                   <p>

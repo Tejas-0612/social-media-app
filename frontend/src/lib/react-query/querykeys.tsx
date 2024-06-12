@@ -14,4 +14,7 @@ export enum QUERY_KEYS {
 
   //  Notification Keys
   GET_USER_NOTIFICATIONS = "getUserNotifications",
+
+  // Saved keys
+  GET_ALL_SAVED_POSTS = "getAllSavedPosts",
 }

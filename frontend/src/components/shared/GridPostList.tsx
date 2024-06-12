@@ -44,7 +44,9 @@ const GridPostList = ({
                     alt="creator"
                     className="w-8 h-8 rounded-full"
                   />
-                  <p className="line-clamp-1">{post.authorId.username}</p>
+                  {/* <p className="line-clamp-1 small-regular">
+                    {post.authorId.username}
+                  </p> */}
                 </div>
               )}
               {showStats && <PostStats post={post} userId={user.id} />}

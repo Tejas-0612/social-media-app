@@ -2,7 +2,10 @@ import { IPost } from "@/types";
 import Loader from "@/components/shared/Loader";
 import GridPostList from "@/components/shared/GridPostList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useGetAllLikedPostsByUserId } from "@/lib/react-query/queriesAndMutations";
+import {
+  useGetAllLikedPostsByUserId,
+  useUserSavedPosts,
+} from "@/lib/react-query/queriesAndMutations";
 import GridTextPostList from "./GridTextPostList";
 import { useUserContext } from "@/context/AuthContext";
 
@@ -15,6 +18,7 @@ type ProfilePostsProps = {
 const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
   const { data: likedPosts, isPending: isLikedPostPending } =
     useGetAllLikedPostsByUserId(userId!);
+
   const { user: currentUser } = useUserContext();
   return (
     <Tabs defaultValue="photo" className="w-full">
@@ -47,33 +51,19 @@ const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
           />
           Liked Posts
         </TabsTrigger>
-        <TabsTrigger
-          value="saved"
-          className={`profile-tabs-trigger ${
-            userId !== currentUser.id && "hidden"
-          }`}
-        >
-          <img
-            src={"/assets/icons/save.svg"}
-            alt="save"
-            width={20}
-            height={20}
-          />
-          Saved Posts
-        </TabsTrigger>
       </TabsList>
       <TabsContent value="photo">
         {isPostsPending ? (
           <Loader />
         ) : (
-          <GridPostList posts={posts} showStats={false} showUser={false} />
+          <GridPostList posts={posts} showStats={true} showUser={false} />
         )}
       </TabsContent>
       <TabsContent value="text">
         {isLikedPostPending ? (
           <Loader />
         ) : (
-          <GridTextPostList posts={posts} showStats={false} showUser={false} />
+          <GridTextPostList posts={posts} showStats={true} showUser={false} />
         )}
       </TabsContent>
       <TabsContent value="liked">
@@ -82,7 +72,7 @@ const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
         ) : (
           <GridPostList
             posts={likedPosts.data}
-            showStats={false}
+            showStats={true}
             showUser={false}
           />
         )}

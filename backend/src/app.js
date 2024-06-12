@@ -24,6 +24,7 @@ import groupRouter from "./routes/group.route.js";
 import likeRouter from "./routes/like.route.js";
 import commentRouter from "./routes/comment.route.js";
 import notificationRouter from "./routes/notification.route.js";
+import saveRouter from "./routes/save.route.js";
 
 // routes declaration
 app.use("/api/v1/healthcheck", healthCheckRouter);
@@ -33,5 +34,5 @@ app.use("/api/v1/group", groupRouter);
 app.use("/api/v1/like", likeRouter);
 app.use("/api/v1/comment", commentRouter);
 app.use("/api/v1/notification", notificationRouter);
-
+app.use("/api/v1/save", saveRouter);
 export { app };

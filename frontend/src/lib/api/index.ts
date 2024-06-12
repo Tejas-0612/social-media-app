@@ -244,6 +244,26 @@ export const addComment = async ({
   }
 };
 
+export const toggleSavePost = async (postId: string) => {
+  try {
+    const response = await axios.patch(`/api/v1/save/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error getting while liking a post", error);
+    throw error;
+  }
+};
+
+export const userSavedPosts = async () => {
+  try {
+    const response = await axios.get("/api/v1/save/");
+    return response.data;
+  } catch (error) {
+    console.log("error while getting saved posts", error);
+    throw error;
+  }
+};
+
 // Notifications
 
 export const getUserNotifications = async (userId: string) => {
