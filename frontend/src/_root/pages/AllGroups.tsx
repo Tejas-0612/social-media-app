@@ -1,10 +1,15 @@
 import { IGroups } from "@/types";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetAllGroups } from "@/lib/react-query/queriesAndMutations";
-
-import Loader from "@/components/shared/Loader";
 import { toast } from "@/components/ui/use-toast";
+import Loader from "@/components/shared/Loader";
 import ProfileCard from "@/components/shared/ProfileCard";
+import CreateGroup from "@/components/shared/CreateGroup";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const AllGroups = () => {
   const {
@@ -35,6 +40,24 @@ const AllGroups = () => {
           <Loader />
         ) : (
           <ul className="user-grid">
+            <div className="profile-card">
+              <AlertDialog>
+                <AlertDialogTrigger>
+                  <img
+                    src={"/assets/icons/create.svg"}
+                    alt="creator"
+                    className=" rounded-full opacity-80"
+                  />
+                  <p className="profile-card-info small-medium text-light-3">
+                    Create New Group
+                  </p>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="max-h-[85%] max-w-4xl overflow-scroll custom-scrollbar bg-dark-2">
+                  <CreateGroup />
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
+
             {!isUserLoading &&
               groups?.data.map((group: IGroups) => (
                 <li key={group._id} className="profile-card-con">

@@ -34,6 +34,7 @@ export type IUpdateUser = {
   fullname?: string;
   bio?: string;
 };
+
 export type IUpdateUserAvatar = {
   avatar: string;
 };
@@ -50,6 +51,34 @@ export type IUsers = {
   username: string;
   avatar: { url: string };
   followers: Array<string>;
+};
+
+export type IGroup = {
+  _id: string;
+  avatar: { url: string };
+  coverImage: { url: string };
+  name: string;
+  description: string;
+  members: Array<userDetails>;
+  posts: Array<string>;
+  admin: { _id: string; url: string; username: string };
+};
+
+export type INewGroup = {
+  avatar?: File;
+  coverImage?: File;
+  name: string;
+  description: string;
+  admin: string;
+};
+
+export type IUpdateGroup = {
+  _id: string;
+  avatar?: File;
+  coverImage?: File;
+  name?: string;
+  description?: string;
+  admin: string;
 };
 
 export type IGroups = {

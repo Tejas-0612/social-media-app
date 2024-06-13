@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import {
   addComment,
+  createGroup,
   createPost,
   createUserAccount,
   exitGroup,
@@ -23,14 +24,21 @@ import {
   toggleFollowUser,
   togglePostLike,
   toggleSavePost,
+  updateGroup,
   updatePost,
   updateUserAvatar,
   updateUserInfo,
   userSavedPosts,
 } from "../api";
 import { QUERY_KEYS } from "./querykeys";
-import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
-import { string } from "zod";
+import {
+  INewGroup,
+  INewPost,
+  INewUser,
+  IUpdateGroup,
+  IUpdatePost,
+  IUpdateUser,
+} from "@/types";
 
 // User Queries
 
@@ -198,6 +206,18 @@ export const useGetUserNotifications = (userId: string) => {
 };
 
 // Group Queries
+
+export const useCreateGroup = () => {
+  return useMutation({
+    mutationFn: (group: INewGroup) => createGroup(group),
+  });
+};
+
+export const useUpdateGroup = () => {
+  return useMutation({
+    mutationFn: (group: IUpdateGroup) => updateGroup(group),
+  });
+};
 
 export const useGetGroupById = (groupId: string) => {
   return useQuery({

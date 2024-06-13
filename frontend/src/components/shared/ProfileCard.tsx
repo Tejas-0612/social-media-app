@@ -23,7 +23,10 @@ const ProfileCard = ({
   const isFollowing = followers?.includes(currentUserId);
 
   return (
-    <Link to={`/profile/${_id}`} className="profile-card">
+    <Link
+      to={`${isUserCard ? `/profile/${_id}` : `/group/${_id}`}`}
+      className="profile-card"
+    >
       <img
         src={avatar?.url || "/assets/icons/profile-placeholder.svg"}
         alt="creator"

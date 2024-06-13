@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { IGroup } from "@/types";
+import EditGroup from "./EditGroup";
 
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
@@ -6,8 +7,12 @@ import {
   useExitGroup,
   useJoinGroup,
 } from "@/lib/react-query/queriesAndMutations";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useUserContext } from "@/context/AuthContext";
-import { IGroup } from "@/types";
 
 const GroupActions = ({ group }: { group: IGroup }) => {
   const { user: currentUser } = useUserContext();
@@ -41,18 +46,20 @@ const GroupActions = ({ group }: { group: IGroup }) => {
   return (
     <div className="flex justify-center gap-4">
       <div className={`${currentUser.id !== group.admin._id && "hidden"}`}>
-        <Link
-          to={`/update-profile/${group.admin._id}`}
-          className={`h-12 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg`}
-        >
-          <img
-            src={"/assets/icons/edit.svg"}
-            alt="edit"
-            width={20}
-            height={20}
-          />
-          <p className="flex whitespace-nowrap small-medium">Edit Profile</p>
-        </Link>
+        <AlertDialog>
+          <AlertDialogTrigger className="h-12 px-5 flex-center gap-2 rounded-lg bg-dark-4 text-light-1">
+            <img
+              src={"/assets/icons/edit.svg"}
+              alt="edit"
+              width={20}
+              height={20}
+            />
+            <p className="flex whitespace-nowrap small-medium">Edit Profile</p>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="max-h-[85%] max-w-4xl overflow-scroll custom-scrollbar bg-dark-2">
+            <EditGroup />
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
       <div className={`${currentUser.id === group.admin._id && "hidden"}`}>
         <Button

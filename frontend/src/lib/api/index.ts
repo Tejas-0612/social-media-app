@@ -1,6 +1,13 @@
 import axios from "axios";
 
-import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
+import {
+  INewGroup,
+  INewPost,
+  INewUser,
+  IUpdateGroup,
+  IUpdatePost,
+  IUpdateUser,
+} from "@/types";
 
 export const getCurrentUser = async () => {
   try {
@@ -278,6 +285,55 @@ export const getUserNotifications = async (userId: string) => {
 };
 
 // Group
+
+export const createGroup = async (group: INewGroup) => {
+  try {
+    const formData = new FormData();
+    formData.append("name", group.name);
+    formData.append("description", group.description);
+
+    if (group.avatar) formData.append("avatar", group.avatar);
+
+    if (group.coverImage) formData.append("coverImage", group.coverImage);
+
+    const response = await axios.post("/api/v1/group/create", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log("error while creating a group", error);
+    throw error;
+  }
+};
+
+export const updateGroup = async (group: IUpdateGroup) => {
+  try {
+    const formData = new FormData();
+
+    if (group.name) formData.append("name", group.name);
+    if (group.description) formData.append("description", group.description);
+    if (group.avatar) formData.append("avatar", group.avatar);
+    if (group.coverImage) formData.append("coverImage", group.coverImage);
+
+    const response = await axios.patch(
+      `/api/v1/group/update/${group._id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log("error while updating a group", error);
+    throw error;
+  }
+};
 
 export const getGroupById = async (groupId: string) => {
   try {
