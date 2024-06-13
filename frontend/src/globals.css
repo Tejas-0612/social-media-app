@@ -249,11 +249,11 @@
 
   /* Profile */
   .profile-container {
-    @apply flex flex-col items-center flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
+    @apply flex flex-col items-center flex-1 gap-4 overflow-scroll py-10 px-5 md:px-14 custom-scrollbar;
   }
 
   .profile-inner_container {
-    @apply flex items-center md:mb-8 xl:items-start gap-8 flex-col xl:flex-row relative max-w-5xl w-full;
+    @apply flex items-center md:mb-4 xl:items-start gap-8 flex-col xl:flex-row relative max-w-5xl  w-full;
   }
 
   .profile-info {
@@ -317,8 +317,22 @@
   .profile-tabs-list {
     @apply bg-dark-3 data-[state=active]:bg-dark-4 rounded-lg my-6;
   }
+
   .profile-tabs-trigger {
     @apply w-full px-10 py-3 gap-2 data-[state=active]:bg-dark-4;
+  }
+
+  /* group  */
+  .group-avatar {
+    @apply absolute w-32 h-32 lg:h-36 lg:w-36 rounded-full top-[125px] left-[30%] lg:left-6 ring-2 ring-dark-4;
+  }
+
+  .group-info {
+    @apply mt-24 flex flex-col lg:flex-row items-center pb-4 justify-between pl-4 border-b-2 border-dark-3 pr-24 rounded-b-2xl;
+  }
+
+  .group-info-2 {
+    @apply flex flex-col items-center justify-between -mt-0  lg:-mt-12 gap-4 md:gap-8;
   }
 }
 

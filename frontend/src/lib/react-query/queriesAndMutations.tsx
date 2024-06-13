@@ -4,16 +4,20 @@ import {
   addComment,
   createPost,
   createUserAccount,
+  exitGroup,
   getAllGroups,
   getAllLikedPostsByUserId,
   getAllPosts,
   getAllUserGroups,
   getAllUserPosts,
   getAllUsers,
+  getGroupById,
+  getGroupPosts,
   getPostById,
   getPostLikes,
   getUserById,
   getUserNotifications,
+  joinGroup,
   signInAccount,
   signOutAccount,
   toggleFollowUser,
@@ -190,5 +194,33 @@ export const useGetUserNotifications = (userId: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_USER_NOTIFICATIONS],
     queryFn: () => getUserNotifications(userId),
+  });
+};
+
+// Group Queries
+
+export const useGetGroupById = (groupId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_GROUP_BY_ID, groupId],
+    queryFn: () => getGroupById(groupId),
+  });
+};
+
+export const useGetGroupPosts = (groupId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_GROUP_POSTS, groupId],
+    queryFn: () => getGroupPosts(groupId),
+  });
+};
+
+export const useJoinGroup = () => {
+  return useMutation({
+    mutationFn: (groupId: string) => joinGroup(groupId),
+  });
+};
+
+export const useExitGroup = () => {
+  return useMutation({
+    mutationFn: (groupId: string) => exitGroup(groupId),
   });
 };

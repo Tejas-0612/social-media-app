@@ -17,4 +17,8 @@ export enum QUERY_KEYS {
 
   // Saved keys
   GET_ALL_SAVED_POSTS = "getAllSavedPosts",
+
+  // Group Keys
+  GET_GROUP_BY_ID = "getGroupById",
+  GET_GROUP_POSTS = "getGroupPosts",
 }

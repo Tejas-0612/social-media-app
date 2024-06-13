@@ -33,10 +33,10 @@ const ProfileInfo = ({ user, postLength }: ProfileInfoProps) => {
         </div>
 
         <div className="profile-stats">
-          <StatBlock label="Posts" value={postLength} />
+          <StatBlock label="Post" value={postLength} />
           <AlertDialog>
             <AlertDialogTrigger className="flex gap-8">
-              <StatBlock label="Followers" value={user.followers.length} />
+              <StatBlock label="Follower" value={user.followers.length} />
               <StatBlock label="Following" value={user.following.length} />
             </AlertDialogTrigger>
             <AlertDialogContent className="w-80 top-[40%] bg-dark-2 min-h-[210px]">

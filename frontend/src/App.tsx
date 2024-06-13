@@ -17,6 +17,7 @@ import UpdateProfile from "./_root/pages/UpdateProfile";
 import Explore from "./_root/pages/Explore";
 import Notifications from "./_root/pages/Notifications";
 import Saved from "./_root/pages/Saved";
+import Group from "./_root/pages/GroupProfile";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/all-groups" element={<AllGroups />} />
           <Route path="/saved" element={<Saved />} />
+          <Route path="/group/:groupId" element={<Group />} />
         </Route>
       </Routes>
 

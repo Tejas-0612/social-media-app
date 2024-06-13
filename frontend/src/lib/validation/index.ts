@@ -43,3 +43,14 @@ export const ProfileValidation = z.object({
   bio: z.string(),
   imageUrl: z.any(),
 });
+
+export const GroupValidation = z.object({
+  name: z
+    .string()
+    .min(5, { message: "Group Name must be atleast 5 characters." }),
+  description: z
+    .string()
+    .min(5, { message: "Group Name must be atleast 5 characters." }),
+  avatar: z.any(),
+  coverImage: z.any(),
+});

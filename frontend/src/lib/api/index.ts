@@ -276,3 +276,45 @@ export const getUserNotifications = async (userId: string) => {
     throw error;
   }
 };
+
+// Group
+
+export const getGroupById = async (groupId: string) => {
+  try {
+    const response = await axios.get(`/api/v1/group/${groupId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting a group info:", error);
+    throw error;
+  }
+};
+
+export const getGroupPosts = async (groupId: string) => {
+  try {
+    const response = await axios.get(`/api/v1/group/posts/${groupId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while getting group posts", error);
+    throw error;
+  }
+};
+
+export const joinGroup = async (groupId: string) => {
+  try {
+    const response = await axios.patch(`/api/v1/group/join/${groupId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while joining a group", error);
+    throw error;
+  }
+};
+
+export const exitGroup = async (groupId: string) => {
+  try {
+    const response = await axios.patch(`/api/v1/group/exit/${groupId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while exiting a group", error);
+    throw error;
+  }
+};

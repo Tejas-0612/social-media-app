@@ -7,14 +7,18 @@ type userStatsProps = {
   following: Array<userDetails>;
 };
 
-const UserCard = ({ users }: { users: Array<userDetails> }) => {
+export const UserCard = ({ users }: { users: Array<userDetails> }) => {
   return users.length == 0 ? (
     <>No users </>
   ) : (
     users.map((user) => (
       <Link to={`/profile/${user._id}`} key={user._id}>
         <div className="flex gap-3 items-center">
-          <img src={user.avatar.url} width={40} height={40} />
+          <img
+            src={user?.avatar?.url || "/assets/icons/profile-placeholder.svg"}
+            width={40}
+            height={40}
+          />
           <p>{user.username}</p>
         </div>
       </Link>

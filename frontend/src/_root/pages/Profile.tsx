@@ -15,7 +15,7 @@ const Profile = () => {
   const { data: user, isPending: isUserPending } = useGetUserById(userId || "");
   const { data: posts, isPending: isPostsPending } = useGetUserPosts(userId!);
 
-  if (!user && isUserPending) {
+  if (isUserPending || isPostsPending) {
     return (
       <div className="flex-center w-full h-full">
         <Loader />
@@ -24,7 +24,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-container gap-10">
       <div className="profile-inner_container">
         <div className="profile-info">
           <ProfileInfo user={user} postLength={posts.data.length} />
