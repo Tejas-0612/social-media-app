@@ -155,3 +155,10 @@ export type INotification = {
   type: string;
   user: { avatar: { url: string } };
 };
+
+export type IComment = {
+  _id: string;
+  userId: { avatar: { url: string }; username: string; _id: string };
+  content: string;
+  createdAt: string;
+};

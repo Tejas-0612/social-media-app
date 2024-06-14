@@ -18,6 +18,7 @@ import Explore from "./_root/pages/Explore";
 import Notifications from "./_root/pages/Notifications";
 import Saved from "./_root/pages/Saved";
 import Group from "./_root/pages/GroupProfile";
+import PostDetails from "./_root/pages/PostDetails";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/edit/:postId" element={<EditPost />} />
+          <Route path="/post/:postId" element={<PostDetails />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/update-profile/:userId" element={<UpdateProfile />} />
           <Route path="/notifications" element={<Notifications />} />

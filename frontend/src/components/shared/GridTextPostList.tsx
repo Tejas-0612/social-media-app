@@ -26,7 +26,7 @@ const GridTextPostList = ({
           console.log(post);
           return (
             <li key={post._id} className="relative min-w-40 h-40">
-              <Link to={`/posts/${post._id}`} className="">
+              <Link to={`/post/${post._id}`} className="">
                 <div
                   className={`grid-post_link small-medium lg:base-medium flex flex-col items-center ${
                     showUser || showStats ? "py-8" : "justify-center"

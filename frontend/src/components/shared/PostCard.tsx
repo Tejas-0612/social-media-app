@@ -48,7 +48,7 @@ const PostCard = ({ post }: { post: IPost }) => {
         </Link>
       </div>
 
-      <Link to={`/posts/${post._id}`}>
+      <Link to={`/post/${post._id}`}>
         <div className="small-medium lg:base-medium py-5">
           <p>{post.content}</p>
           <ul className="flex gap-1 mt-2">
@@ -67,7 +67,9 @@ const PostCard = ({ post }: { post: IPost }) => {
 
       <PostStats post={post} userId={user.id} />
 
-      <CommentCard post={post} userImg={user.imageUrl} />
+      <div className="pt-2">
+        <CommentCard post={post} userImg={user.imageUrl} />
+      </div>
     </div>
   );
 };

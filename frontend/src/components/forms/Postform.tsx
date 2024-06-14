@@ -82,7 +82,7 @@ const Postform = ({ post, action }: PostFormProps) => {
           title: `${action} post failed. Please try again.`,
         });
       }
-      return navigate(`/posts/${post._id}`);
+      return navigate(`/post/${post._id}`);
     }
 
     const newPost = await createPost({
