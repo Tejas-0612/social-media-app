@@ -169,6 +169,16 @@ export const updatePost = async (post: IUpdatePost) => {
   }
 };
 
+export const deletePost = async (postId: string) => {
+  try {
+    const response = await axios.delete(`/api/v1/post/delete/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while deleteing a post", error);
+    throw error;
+  }
+};
+
 export const getPostById = async (postId?: string) => {
   if (!postId) throw Error;
   try {

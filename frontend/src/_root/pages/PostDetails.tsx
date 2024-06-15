@@ -13,6 +13,7 @@ import {
 } from "@/lib/react-query/queriesAndMutations";
 import GridPostList from "@/components/shared/GridPostList";
 import GridTextPostList from "@/components/shared/GridTextPostList";
+import DeletePost from "@/components/shared/DeletePost";
 
 const PostDetails = () => {
   const { postId } = useParams();
@@ -71,17 +72,13 @@ const PostDetails = () => {
                     height={20}
                   />
                 </Link>
-                <Link
-                  to={`/edit/${_id}`}
-                  className={`${user.id !== authorId._id && "hidden"}`}
+                <div
+                  className={`${
+                    user.id !== authorId._id && "hidden"
+                  } cursor-pointer`}
                 >
-                  <img
-                    src={"/assets/icons/delete.svg"}
-                    alt="delete"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
+                  <DeletePost postId={postId!} />
+                </div>
               </div>
             </div>
             <div className="small-medium lg:base-medium pt-5">

@@ -5,6 +5,7 @@ import {
   createGroup,
   createPost,
   createUserAccount,
+  deletePost,
   exitGroup,
   getAllGroups,
   getAllLikedPostsByUserId,
@@ -124,6 +125,12 @@ export const useCreatePost = () => {
 export const useUpdatePost = () => {
   return useMutation({
     mutationFn: (post: IUpdatePost) => updatePost(post),
+  });
+};
+
+export const useDeletePost = () => {
+  return useMutation({
+    mutationFn: (postId: string) => deletePost(postId),
   });
 };
 
