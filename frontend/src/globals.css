@@ -230,7 +230,7 @@
   }
 
   .post-details-info {
-    @apply md:h-[400px] bg-dark-3 rounded-b-2xl lg:rounded-l-none lg:rounded-r-2xl relative w-full md:w-[480px] gap-3 pb-2;
+    @apply md:h-[420px] bg-dark-3 rounded-b-2xl lg:rounded-l-none lg:rounded-r-2xl relative w-full md:w-[480px] gap-3 pb-2;
   }
 
   /* Post Card */
@@ -244,7 +244,7 @@
 
   /* Comment card */
   .comment-card {
-    @apply flex gap-2 mt-4;
+    @apply flex gap-2;
   }
 
   .comment-card > img {

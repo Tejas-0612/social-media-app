@@ -67,7 +67,7 @@ const PostCard = ({ post }: { post: IPost }) => {
 
       <PostStats post={post} userId={user.id} />
 
-      <div className="pt-2">
+      <div className="pt-6">
         <CommentCard post={post} userImg={user.imageUrl} />
       </div>
     </div>

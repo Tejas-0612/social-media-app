@@ -14,6 +14,7 @@ import {
 import GridPostList from "@/components/shared/GridPostList";
 import GridTextPostList from "@/components/shared/GridTextPostList";
 import DeletePost from "@/components/shared/DeletePost";
+import PostStats from "@/components/shared/PostStats";
 
 const PostDetails = () => {
   const { postId } = useParams();
@@ -36,7 +37,7 @@ const PostDetails = () => {
       <div className="common-container">
         <div className="post-details-container">
           <div className={`${!imageUrl && "hidden"} post-details-img`}>
-            <img src={imageUrl} className="w-full md:w-[430px] md:h-[400px]" />
+            <img src={imageUrl} className="w-full md:w-[430px] md:h-[420px]" />
           </div>
           <div className="post-details-info px-4">
             <div className="flex flex-between pt-3">
@@ -97,7 +98,7 @@ const PostDetails = () => {
             </div>
             <div>
               <p className="small-regular text-light-2 pt-2">comments</p>
-              <ul className="h-[160px] overflow-scroll custom-scrollbar">
+              <ul className="h-[150px] overflow-scroll custom-scrollbar">
                 {comments.length == 0 ? (
                   <p className="body-regular text-center pt-14">
                     No comments to show{" "}
@@ -115,8 +116,8 @@ const PostDetails = () => {
                 )}
               </ul>
             </div>
-
-            <div className="w-full">
+            <div className="w-full flex flex-col gap-3 pt-3">
+              <PostStats post={post.data} userId={user.id} />
               <CommentCard post={post?.data} userImg={user.imageUrl} />
             </div>
           </div>

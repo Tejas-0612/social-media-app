@@ -161,7 +161,7 @@ export const useGetAllPosts = () => {
 
 export const useTogglePostLike = () => {
   return useMutation({
-    mutationFn: ({ postId }: { postId: string }) => togglePostLike(postId),
+    mutationFn: (postId: string) => togglePostLike(postId),
   });
 };
 

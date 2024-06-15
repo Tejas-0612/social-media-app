@@ -25,16 +25,17 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
 
   const [likes, setLikes] = useState<string[]>([]);
   const [isSaved, setIsSaved] = useState<boolean>();
-  const { mutate: toggleLikePost } = useTogglePostLike();
+  const { mutateAsync: toggleLikePost, isSuccess: isLiked } =
+    useTogglePostLike();
   const { mutateAsync: savePost } = useToggleSavePost();
 
   useEffect(() => {
     if (isLikesFetched && postLikes) {
       setLikes(postLikes.data.map((like: any) => like.userId));
     }
-  }, [postLikes, isLikesFetched]);
+  }, [postLikes, isLikesFetched, isLiked]);
 
-  const handleLikePost = (
+  const handleLikePost = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>
   ) => {
     e.stopPropagation();
@@ -48,7 +49,9 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
     }
 
     setLikes(likesArray);
-    toggleLikePost({ postId: post._id });
+    await toggleLikePost(post._id);
+
+    toast({ title: "liked the post" });
   };
 
   const handleSave = async () => {
