@@ -30,7 +30,7 @@ import { toast } from "../ui/use-toast";
 import FileUploader from "../shared/FileUploader";
 import Loader from "../shared/Loader";
 
-const Postform = ({ post, action }: PostFormProps) => {
+const Postform = ({ post, action, group }: PostFormProps) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
 
@@ -91,6 +91,7 @@ const Postform = ({ post, action }: PostFormProps) => {
       authorId: user.id,
       image: values.image[0],
       mentions: value.map((user) => user.value),
+      groupId: group,
     });
 
     if (!newPost) {

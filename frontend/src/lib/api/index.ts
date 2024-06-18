@@ -136,7 +136,6 @@ export const getAllUserGroups = async () => {
 
 export const createPost = async (post: INewPost) => {
   try {
-    console.log(post);
     const formData = new FormData();
     formData.append("authorId", post.authorId);
     formData.append("content", post.content);
@@ -145,8 +144,10 @@ export const createPost = async (post: INewPost) => {
     if (post.image) {
       formData.append("image", post.image);
     }
+    if (post.groupId) {
+      formData.append("groupId", post.groupId);
+    }
 
-    console.log(formData);
     const response = await axios.post("/api/v1/post/create", formData, {
       headers: {
         "Content-Type": "multipart/form-data",

@@ -124,7 +124,7 @@ export type INewPost = {
   image?: any;
   hashtags: Array<string>;
   mentions?: Array<string>;
-  groupsId?: string;
+  groupId?: string;
 };
 
 export type IUpdatePost = {
@@ -137,6 +137,7 @@ export type IUpdatePost = {
 export type PostFormProps = {
   post?: IPost;
   action: "create" | "update";
+  group?: string | undefined;
 };
 
 // Multiselect Component

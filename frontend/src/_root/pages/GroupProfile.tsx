@@ -5,6 +5,7 @@ import GroupPosts from "@/components/shared/GroupPosts";
 import { useGetGroupById } from "@/lib/react-query/queriesAndMutations";
 import Loader from "@/components/shared/Loader";
 import StatBlock from "@/components/shared/StatBlock";
+import CreateGroupPost from "@/components/shared/CreateGroupPost";
 
 const Group = () => {
   const { groupId } = useParams();
@@ -64,6 +65,10 @@ const Group = () => {
           {/* GROUP POSTS */}
           <div className="profile-inner_container">
             <GroupPosts groupId={groupId!} members={members} />
+          </div>
+
+          <div className="absolute bottom-2 md:bottom-4 right-4 md:right-40">
+            <CreateGroupPost groupId={groupId!} />
           </div>
         </div>
       </div>
