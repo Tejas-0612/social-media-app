@@ -194,6 +194,7 @@ export const getPostById = async (postId?: string) => {
 export const getAllPosts = async () => {
   try {
     const response = await axios.get("/api/v1/post");
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log("error while getting all posts", error);
@@ -382,6 +383,16 @@ export const exitGroup = async (groupId: string) => {
     return response.data;
   } catch (error) {
     console.log("error while exiting a group", error);
+    throw error;
+  }
+};
+
+export const deleteGroup = async (groupId: string) => {
+  try {
+    const response = await axios.delete(`/api/v1/group/delete/${groupId}`);
+    return response.data;
+  } catch (error) {
+    console.log("error while deleting a group", error);
     throw error;
   }
 };

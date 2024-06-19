@@ -4,20 +4,31 @@ import EditGroup from "./EditGroup";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 import {
+  useDeleteGroup,
   useExitGroup,
   useJoinGroup,
 } from "@/lib/react-query/queriesAndMutations";
 import {
   AlertDialog,
   AlertDialogContent,
+  AlertDialogFooter,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useUserContext } from "@/context/AuthContext";
+import {
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogTitle,
+} from "@radix-ui/react-alert-dialog";
+import { useNavigate } from "react-router-dom";
 
 const GroupActions = ({ group }: { group: IGroup }) => {
+  const navigate = useNavigate();
+
   const { user: currentUser } = useUserContext();
   const { mutateAsync: joinGroup } = useJoinGroup();
   const { mutateAsync: exitGroup } = useExitGroup();
+  const { mutateAsync: deleteGroup } = useDeleteGroup();
 
   const isMember = group.members.some(
     (member: { _id: string }) => member._id === currentUser.id
@@ -43,21 +54,67 @@ const GroupActions = ({ group }: { group: IGroup }) => {
     }
   };
 
+  const handleDeleteGroup = async () => {
+    try {
+      const response = await deleteGroup(group._id);
+      console.log(response);
+      if (response) {
+        toast({ title: `Deleted group '${group.name}' successfully` });
+      }
+      navigate(-1);
+    } catch (error) {
+      console.log("error while deleting a group", error);
+      throw error;
+    }
+  };
+
   return (
     <div className="flex justify-center gap-4">
-      <div className={`${currentUser.id !== group.admin._id && "hidden"}`}>
+      <div
+        className={`${
+          currentUser.id !== group.admin._id && "hidden"
+        } flex gap-2 items-center`}
+      >
         <AlertDialog>
-          <AlertDialogTrigger className="h-12 px-5 flex-center gap-2 rounded-lg bg-dark-4 text-light-1">
+          <AlertDialogTrigger className="group-action-btn hover:ring-primary-500 ">
             <img
               src={"/assets/icons/edit.svg"}
               alt="edit"
               width={20}
               height={20}
             />
-            <p className="flex whitespace-nowrap small-medium">Edit Profile</p>
           </AlertDialogTrigger>
           <AlertDialogContent className="max-h-[85%] max-w-4xl overflow-scroll custom-scrollbar bg-dark-2">
             <EditGroup />
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog>
+          <AlertDialogTrigger className="group-action-btn hover:ring-red-400">
+            <img
+              src={"/assets/icons/delete.svg"}
+              alt="edit"
+              width={20}
+              height={20}
+            />
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogFooter>
+              <AlertDialogCancel>
+                <Button className="shad-button_dark_4 ring-1 ring-off-white">
+                  Cancel
+                </Button>
+              </AlertDialogCancel>
+              <AlertDialogAction>
+                <Button
+                  onClick={() => handleDeleteGroup()}
+                  className="shad-button_danger"
+                >
+                  Yes, delete Group
+                </Button>
+              </AlertDialogAction>
+            </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       </div>

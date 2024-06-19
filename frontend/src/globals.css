@@ -340,11 +340,15 @@
   }
 
   .group-info {
-    @apply mt-24 flex flex-col lg:flex-row items-center pb-4 justify-between pl-4 border-b-2 border-dark-3 pr-24 rounded-b-2xl;
+    @apply mt-24  px-6 pb-4 flex flex-col lg:flex-row items-center justify-between border-b-2 border-dark-3 rounded-b-2xl;
   }
 
   .group-info-2 {
-    @apply flex flex-col items-center justify-between -mt-0  lg:-mt-12 gap-4 md:gap-8;
+    @apply flex flex-col items-end justify-between mt-4  lg:-mt-12 gap-4 md:gap-8;
+  }
+
+  .group-action-btn {
+    @apply h-10 px-3 md:h-12 md:px-4 rounded-lg bg-dark-4 hover:ring-1;
   }
 }
 
@@ -378,6 +382,10 @@
 
   .shad-button_dark_4 {
     @apply bg-dark-4 px-5 text-light-1 flex gap-2 !important;
+  }
+
+  .shad-button_danger {
+    @apply bg-red-400 px-5 text-light-1 flex gap-2 !important;
   }
 
   .shad-button_ghost {

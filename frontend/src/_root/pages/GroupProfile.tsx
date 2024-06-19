@@ -34,7 +34,7 @@ const Group = () => {
                 <img src={avatar.url} alt="profile" className="group-avatar" />
               </div>
               <div className="group-info">
-                <div>
+                <div className="flex flex-col items-center xl:items-start">
                   <p className="h2-bold">{name}</p>
                   <p className="text-light-3">{description}</p>
 
@@ -51,9 +51,9 @@ const Group = () => {
                         "/assets/icons/profile-placeholder.svg"
                       }
                       alt="Admin"
-                      className="w-10 h-10 rounded-full"
+                      className="w-8 h-8 md:w-10 md:h-10 rounded-full"
                     />
-                    <span className="font-bold">{admin.username}</span>
+                    <p className="font-medium md:font-bold">{admin.username}</p>
                   </div>
 
                   <GroupActions group={groupInfo.data} />
