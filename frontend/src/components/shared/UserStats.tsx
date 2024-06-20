@@ -18,6 +18,7 @@ export const UserCard = ({ users }: { users: Array<userDetails> }) => {
             src={user?.avatar?.url || "/assets/icons/profile-placeholder.svg"}
             width={40}
             height={40}
+            className="rounded-full w-8 h-8"
           />
           <p>{user.username}</p>
         </div>

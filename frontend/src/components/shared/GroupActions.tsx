@@ -57,13 +57,12 @@ const GroupActions = ({ group }: { group: IGroup }) => {
   const handleDeleteGroup = async () => {
     try {
       const response = await deleteGroup(group._id);
-      console.log(response);
       if (response) {
         toast({ title: `Deleted group '${group.name}' successfully` });
       }
       navigate(-1);
     } catch (error) {
-      console.log("error while deleting a group", error);
+      toast({ title: "error while deleting a group" });
       throw error;
     }
   };

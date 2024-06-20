@@ -20,7 +20,7 @@ const PostCard = ({ post }: { post: IPost }) => {
                 "/assets/icons/profile-placeholder.svg"
               }
               alt="creator"
-              className="w-12 lg:h-12 rounded-full"
+              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full"
             />
           </Link>
 

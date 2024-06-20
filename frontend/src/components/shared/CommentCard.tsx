@@ -41,12 +41,7 @@ const CommentCard = ({ post, userImg }: commentCardProps) => {
           onChange={(e) => setComment(e.target.value)}
         />
         <Button type="submit">
-          <img
-            src="/assets/icons/send.svg"
-            alt="profile"
-            width={24}
-            height={24}
-          />
+          <img src="/assets/icons/send.svg" alt="profile" />
         </Button>
       </form>
     </div>

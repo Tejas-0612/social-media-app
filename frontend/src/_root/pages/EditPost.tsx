@@ -7,7 +7,6 @@ const EditPost = () => {
   const { postId } = useParams();
   const { data: post, isLoading } = useGetPostById(postId);
 
-  console.log(post);
   if (isLoading) {
     return (
       <div className="flex-center w-full h-full">

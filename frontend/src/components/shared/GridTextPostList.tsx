@@ -23,7 +23,6 @@ const GridTextPostList = ({
       {posts
         .filter((post) => post.type == "text")
         .map((post) => {
-          console.log(post);
           return (
             <li key={post._id} className="relative min-w-40 h-40">
               <Link to={`/post/${post._id}`} className="">

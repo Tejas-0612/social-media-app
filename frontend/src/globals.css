@@ -160,7 +160,7 @@
 
   /* Home */
   .home-container {
-    @apply flex flex-col flex-1 items-center gap-10 py-10 px-5 md:px-8 lg:p-14 overflow-scroll custom-scrollbar;
+    @apply flex flex-col md:flex-1 items-center gap-10 py-10 px-4 md:px-8 lg:p-14 overflow-y-scroll custom-scrollbar;
   }
 
   .home-posts {
@@ -176,11 +176,11 @@
   }
 
   .home-icons {
-    @apply w-8 h-8;
+    @apply w-7 h-7;
   }
 
   .home-user-icon {
-    @apply ring-2 ring-primary-600 rounded-full w-11 h-11;
+    @apply ring-2 ring-dark-4 rounded-full w-10 h-10;
   }
 
   .home-recommended {
@@ -244,15 +244,18 @@
 
   /* Comment card */
   .comment-card {
-    @apply flex gap-2;
+    @apply flex gap-2 items-center;
   }
 
   .comment-card > img {
-    @apply rounded-full w-10 h-10 ring-2 ring-dark-4;
+    @apply rounded-full h-8 w-8 md:w-10 md:h-10 ring-2 ring-dark-4;
   }
 
   .comment-card > form {
-    @apply flex items-center shad-input2 *:border-none *:bg-dark-4 rounded-lg h-10 w-full;
+    @apply flex items-center shad-input2 *:border-none *:bg-dark-4 rounded-lg w-full;
+  }
+  .comment-card > form > input {
+    /* @apply h-6 md:h-10; */
   }
 
   .common-container {
@@ -331,7 +334,7 @@
   }
 
   .profile-tabs-trigger {
-    @apply w-full px-10 py-3 gap-2 data-[state=active]:bg-dark-4;
+    @apply w-full px-4 md:px-10 py-3 gap-2 data-[state=active]:bg-dark-4;
   }
 
   /* group  */

@@ -36,7 +36,7 @@ const DisplayCard = ({
         </div>
       </div>
 
-      <Link to={`${isCreator ? `/user/profile/${_id}` : `/group/join/${_id}`}`}>
+      <Link to={`${isCreator ? `/profile/${_id}` : `/group/${_id}`}`}>
         <Button className="display-btn">{`${
           isCreator ? "View" : "Join"
         }`}</Button>

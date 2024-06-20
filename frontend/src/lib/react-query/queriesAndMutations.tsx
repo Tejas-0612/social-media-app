@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import {
   addComment,
   createGroup,
   createPost,
   createUserAccount,
+  deleteGroup,
   deletePost,
   exitGroup,
   getAllGroups,
@@ -81,8 +82,14 @@ export const useGetUserById = (userId: string) => {
 };
 
 export const useToggleFollowUser = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (followingId: string) => toggleFollowUser(followingId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USER_BY_ID],
+      });
+    },
   });
 };
 
@@ -117,20 +124,47 @@ export const useGetAllUserGroups = () => {
 // Post Queries
 
 export const useCreatePost = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (post: INewPost) => createPost(post),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_ALL_POSTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_GROUP_POSTS],
+      });
+    },
   });
 };
 
 export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (post: IUpdatePost) => updatePost(post),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?._id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_GROUP_POSTS],
+      });
+    },
   });
 };
 
 export const useDeletePost = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (postId: string) => deletePost(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_ALL_POSTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_GROUP_POSTS],
+      });
+    },
   });
 };
 
@@ -160,8 +194,14 @@ export const useGetAllPosts = () => {
 // Like Queries
 
 export const useTogglePostLike = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (postId: string) => togglePostLike(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_LIKES],
+      });
+    },
   });
 };
 
@@ -182,8 +222,23 @@ export const useGetPostLikes = (postId: string) => {
 };
 
 export const useToggleSavePost = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (postId: string) => toggleSavePost(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_ALL_SAVED_POSTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_ALL_POSTS],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_ALL_POST_BY_USER_ID],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID],
+      });
+    },
   });
 };
 
@@ -197,9 +252,18 @@ export const useUserSavedPosts = () => {
 // Comment Queries
 
 export const useAddComment = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ postId, content }: { postId: string; content: string }) =>
       addComment({ postId, content }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_ALL_POSTS],
+      });
+    },
   });
 };
 
@@ -221,8 +285,14 @@ export const useCreateGroup = () => {
 };
 
 export const useUpdateGroup = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (group: IUpdateGroup) => updateGroup(group),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_GROUP_BY_ID],
+      });
+    },
   });
 };
 
@@ -241,13 +311,31 @@ export const useGetGroupPosts = (groupId: string) => {
 };
 
 export const useJoinGroup = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (groupId: string) => joinGroup(groupId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_GROUP_BY_ID],
+      });
+    },
   });
 };
 
 export const useExitGroup = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (groupId: string) => exitGroup(groupId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_GROUP_BY_ID],
+      });
+    },
+  });
+};
+
+export const useDeleteGroup = () => {
+  return useMutation({
+    mutationFn: (groupId: string) => deleteGroup(groupId),
   });
 };

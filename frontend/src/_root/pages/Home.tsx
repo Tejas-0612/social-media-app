@@ -64,7 +64,7 @@ const Home = () => {
             />
           </Link>
 
-          <Link to={`user/settings`}>
+          <Link to={``}>
             <img src="/assets/icons/setting.svg" className="home-icons" />
           </Link>
 
