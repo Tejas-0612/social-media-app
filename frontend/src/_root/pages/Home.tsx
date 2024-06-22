@@ -82,12 +82,12 @@ const Home = () => {
             <h1 className="h4-bold">Your Groups</h1>
             <ul>
               {isGroupSuccess &&
-                allUserGroups?.data.map(
+                allUserGroups.data.map(
                   ({ _id, avatar, name, members }: IGroups) => (
                     <li key={_id}>
                       <DisplayCard
                         _id={_id}
-                        avatar={avatar?.url}
+                        avatar={avatar.url}
                         name={name}
                         type="group"
                         members={members}
@@ -103,9 +103,8 @@ const Home = () => {
             <ul>
               {" "}
               {isSuccess &&
-                allUsers?.data
-                  .filter((user: { avatar: string }) => user.avatar)
-                  .map(({ _id, username, avatar, fullname }: IUsers) => (
+                allUsers.data.map(
+                  ({ _id, username, avatar, fullname }: IUsers) => (
                     <li key={_id}>
                       <DisplayCard
                         _id={_id}
@@ -115,7 +114,8 @@ const Home = () => {
                         username={username}
                       />
                     </li>
-                  ))}
+                  )
+                )}
             </ul>
           </div>
         </div>
