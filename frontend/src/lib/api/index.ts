@@ -194,7 +194,6 @@ export const getPostById = async (postId?: string) => {
 export const getAllPosts = async () => {
   try {
     const response = await axios.get("/api/v1/post");
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log("error while getting all posts", error);
@@ -226,7 +225,7 @@ export const togglePostLike = async (postId: string) => {
 export const getAllLikedPostsByUserId = async (userId: string) => {
   if (!userId) throw Error;
   try {
-    const response = await axios.post(`/api/v1/like/user/${userId}`);
+    const response = await axios.get(`/api/v1/like/user/${userId}`);
     return response.data;
   } catch (error) {
     console.log("Error getting while liking a post", error);

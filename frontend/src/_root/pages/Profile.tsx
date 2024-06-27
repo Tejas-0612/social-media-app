@@ -12,10 +12,10 @@ import ProfileInfo from "@/components/shared/ProfileInfo";
 const Profile = () => {
   const { userId } = useParams();
 
-  const { data: user, isPending: isUserPending } = useGetUserById(userId || "");
-  const { data: posts, isPending: isPostsPending } = useGetUserPosts(userId!);
-
-  if (isUserPending || isPostsPending) {
+  const { data: user, isPending: isUserPending } = useGetUserById(userId!);
+  const { data: posts, isFetching: isPostsPending } = useGetUserPosts(userId!);
+  console.log(posts);
+  if (isUserPending) {
     return (
       <div className="flex-center w-full h-full">
         <Loader />
@@ -27,7 +27,7 @@ const Profile = () => {
     <div className="profile-container gap-10">
       <div className="profile-inner_container">
         <div className="profile-info">
-          <ProfileInfo user={user} postLength={posts.data.length} />
+          <ProfileInfo user={user} postLength={posts?.data?.length} />
 
           <ProfileActions user={user} userId={userId!} />
         </div>
@@ -35,7 +35,7 @@ const Profile = () => {
 
       <ProfilePosts
         userId={userId}
-        posts={posts.data}
+        posts={posts?.data}
         isPostsPending={isPostsPending}
       />
     </div>

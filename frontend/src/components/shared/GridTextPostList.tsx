@@ -16,7 +16,7 @@ const GridTextPostList = ({
 }: GridTextListProps) => {
   const { user } = useUserContext();
 
-  return posts.length == 0 ? (
+  return !posts || posts.length == 0 ? (
     <p>No posts to show</p>
   ) : (
     <ul className="grid-container">

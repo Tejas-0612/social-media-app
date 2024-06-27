@@ -1,11 +1,9 @@
+import { useParams } from "react-router-dom";
 import { IPost } from "@/types";
 import Loader from "@/components/shared/Loader";
 import GridPostList from "@/components/shared/GridPostList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  useGetAllLikedPostsByUserId,
-  useUserSavedPosts,
-} from "@/lib/react-query/queriesAndMutations";
+import { useGetAllLikedPostsByUserId } from "@/lib/react-query/queriesAndMutations";
 import GridTextPostList from "./GridTextPostList";
 import { useUserContext } from "@/context/AuthContext";
 
@@ -15,11 +13,13 @@ type ProfilePostsProps = {
   isPostsPending: boolean;
 };
 
-const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
+const ProfilePosts = ({ posts, isPostsPending }: ProfilePostsProps) => {
+  const { userId } = useParams();
   const { data: likedPosts, isPending: isLikedPostPending } =
     useGetAllLikedPostsByUserId(userId!);
 
   const { user: currentUser } = useUserContext();
+
   return (
     <Tabs defaultValue="photo" className="w-full">
       <TabsList className="profile-tabs-list">
@@ -60,7 +60,7 @@ const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
         )}
       </TabsContent>
       <TabsContent value="text">
-        {isLikedPostPending ? (
+        {isPostsPending ? (
           <Loader />
         ) : (
           <GridTextPostList posts={posts} showStats={true} showUser={false} />
@@ -71,7 +71,7 @@ const ProfilePosts = ({ userId, posts, isPostsPending }: ProfilePostsProps) => {
           <Loader />
         ) : (
           <GridPostList
-            posts={likedPosts.data}
+            posts={likedPosts?.data}
             showStats={true}
             showUser={false}
           />

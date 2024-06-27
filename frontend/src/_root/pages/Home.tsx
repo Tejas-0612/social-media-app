@@ -78,7 +78,7 @@ const Home = () => {
         </div>
 
         <div className="home-recommended">
-          <div>
+          <div className={`${allUserGroups?.data.length == 0 && "hidden"}`}>
             <h1 className="h4-bold">Your Groups</h1>
             <ul>
               {isGroupSuccess &&
