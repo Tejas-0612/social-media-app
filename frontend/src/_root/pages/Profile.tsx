@@ -14,7 +14,7 @@ const Profile = () => {
 
   const { data: user, isPending: isUserPending } = useGetUserById(userId!);
   const { data: posts, isFetching: isPostsPending } = useGetUserPosts(userId!);
-  console.log(posts);
+
   if (isUserPending) {
     return (
       <div className="flex-center w-full h-full">

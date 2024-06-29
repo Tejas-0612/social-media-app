@@ -99,9 +99,7 @@ const UpdateProfile = () => {
         </div>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit, (errors) => {
-              console.log("Form errors", errors);
-            })}
+            onSubmit={form.handleSubmit(onSubmit, (errors) => {})}
             className="flex flex-col gap-7 w-full mt-4 max-w-5xl"
           >
             <FormField
