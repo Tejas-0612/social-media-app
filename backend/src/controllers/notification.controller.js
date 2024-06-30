@@ -38,7 +38,9 @@ const getAllNotifications = asyncHandler(async (req, res) => {
   if (userId != req.user._id.toString()) {
     throw new ApiError(400, "user does not have acess to this");
   }
-  const notifications = await Notification.find({ user: userId });
+  const notifications = await Notification.find({ user: userId })
+    .populate("user", "username avatar")
+    .sort({ createdAt: -1 });
 
   return res
     .status(200)

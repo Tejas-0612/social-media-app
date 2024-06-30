@@ -6,9 +6,10 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { sendNotification } from "../utils/notification.utility.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { Group } from "../models/group.model.js";
 
 const createPost = asyncHandler(async (req, res) => {
-  const { content, groupId = null, hashtags, mentions } = req.body;
+  const { content, groupId, hashtags, mentions } = req.body;
 
   if (!content || content.trim() === "") {
     throw new ApiError(400, "content is required");
@@ -39,10 +40,16 @@ const createPost = asyncHandler(async (req, res) => {
     type,
     imageUrl: imageUrl?.url || null,
     content,
-    groupId,
+    groupId: groupId || null,
     hashtags,
     mentions,
   });
+
+  if (groupId != null) {
+    await Group.findByIdAndUpdate(groupId, {
+      $push: { posts: createdPost._id },
+    });
+  }
 
   if (mentions && mentions.length != 0) {
     mentions.every(
@@ -83,21 +90,21 @@ const updatePost = asyncHandler(async (req, res) => {
   post.mentions = mentions || post.mentions;
   await post.save();
 
-  if (
-    mentions &&
-    mentions.length > 0 &&
-    mentions.every(async (userId) => {
-      if (isValidObjectId(userId)) {
-        await sendNotification({
-          userId,
-          type: "mention",
-          message: `${req.user.username} metioned you in a post`,
-        });
-      }
-    })
-  ) {
-    throw new ApiError(400, "mention userId's are not valid");
-  }
+  // if (
+  //   mentions &&
+  //   mentions.length > 0 &&
+  //   mentions.every(async (userId) => {
+  //     if (isValidObjectId(userId)) {
+  //       await sendNotification({
+  //         userId,
+  //         type: "mention",
+  //         message: `${req.user.username} metioned you in a post`,
+  //       });
+  //     }
+  //   })
+  // ) {
+  //   throw new ApiError(400, "mention userId's are not valid");
+  // }
 
   return res
     .status(200)
@@ -111,10 +118,16 @@ const getPostById = asyncHandler(async (req, res) => {
     throw new ApiError(400, "postId is not valid");
   }
 
-  const post = await Post.findById(postId).populate(
-    "authorId",
-    "username avatar fullname"
-  );
+  const post = await Post.findById(postId)
+    .populate("authorId", "avatar username fullname")
+    .populate({
+      path: "comments",
+      select: "content createdAt",
+      populate: {
+        path: "userId",
+        select: "avatar.url username",
+      },
+    });
 
   if (!post) {
     throw new ApiError(404, "something went wrong while getting a post");
@@ -158,10 +171,9 @@ const deletePost = asyncHandler(async (req, res) => {
 });
 
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find().populate(
-    "authorId",
-    "avatar username fullname"
-  );
+  const posts = await Post.find({ groupId: null })
+    .populate("authorId", "avatar username fullname")
+    .sort({ createdAt: -1 });
 
   if (!posts) {
     throw new ApiError(500, "Error while getting the posts");
@@ -180,14 +192,10 @@ const getPostByAuthorId = asyncHandler(async (req, res) => {
   const posts = await Post.find({
     authorId,
     groupId: null,
-  });
+  }).populate("authorId", "avatar username");
 
   if (!posts) {
     throw new ApiError(500, "Error while geting posts of a user");
-  }
-
-  if (posts.length == 0) {
-    return res.status(200, posts, "User has no posts");
   }
 
   return res

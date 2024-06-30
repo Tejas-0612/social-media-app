@@ -20,21 +20,24 @@ const togglepostLike = asyncHandler(async (req, res) => {
     throw new ApiError(400, "post doees not exits");
   }
   const userId = req.user._id;
-  const hasLiked = await Like.findOne({ postId, userId });
+  const hasLiked = await Like.findOne({ post: postId, userId });
 
-  console.log(hasLiked);
   if (hasLiked?._id) {
     await Like.findByIdAndDelete(hasLiked._id);
+
+    await post.likes.pull(userId);
   } else {
     like = await Like.create({
       userId,
       type: "Post",
-      postId,
+      post: postId,
     });
 
     if (!like) {
       throw new ApiError(400, "Problem while liking the post");
     }
+
+    await post.likes.push(userId);
   }
 
   req.body = {
@@ -98,10 +101,39 @@ const getAllLikedPostsByUserId = asyncHandler(async (req, res) => {
   }
 
   const likedposts = await Like.find({ userId })
-    .populate("postId", "-createdAt -updatedAt -groupId")
-    .select("-type -userId ");
+    .populate("post", "-createdAt -updatedAt -groupId")
+    .lean();
 
-  return res.status(200).json(new ApiResponse(200, likedposts, "likedPosts"));
+  const transformedPosts = likedposts.map((item) => ({
+    _id: item._id,
+    authorId: item.post.authorId,
+    type: item.post.type,
+    imageUrl: item.post.imageUrl,
+    content: item.post.content,
+    hashtags: item.post.hashtags,
+    mentions: item.post.mentions,
+    likes: item.post.likes,
+    comments: item.post.comments,
+  }));
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, transformedPosts, "likedPosts"));
 });
 
-export { togglepostLike, toggleCommentLike, getAllLikedPostsByUserId };
+const GetPostLikes = asyncHandler(async (req, res) => {
+  const { postId } = req.params;
+
+  const likes = await Like.find({ post: postId });
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, likes, "fetched all post likes"));
+});
+
+export {
+  togglepostLike,
+  toggleCommentLike,
+  getAllLikedPostsByUserId,
+  GetPostLikes,
+};

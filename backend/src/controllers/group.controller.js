@@ -21,7 +21,6 @@ const createGroup = asyncHandler(async (req, res) => {
   }
   const avatarLocalPath = req.files?.avatar?.[0]?.path;
 
-  console.log(req.files);
   let coverImageLocalPath;
   if (
     req.files &&
@@ -80,9 +79,9 @@ const updateGroup = asyncHandler(async (req, res) => {
     throw new ApiError(400, "GroupId id not valid");
   }
 
-  if (!(!name || !description)) {
-    throw new ApiError(400, "name or description is missing");
-  }
+  // if (!(!name || !description)) {
+  //   throw new ApiError(400, "name or description is missing");
+  // }
 
   const group = await Group.findById(groupId);
 
@@ -135,10 +134,9 @@ const getGroupById = asyncHandler(async (req, res) => {
     throw new ApiError(400, "groupId is not valid");
   }
 
-  const group = await Group.findById(groupId).populate(
-    "admin",
-    "username avatar fullname"
-  );
+  const group = await Group.findById(groupId)
+    .populate("admin", "username avatar fullname")
+    .populate("members", "username avatar fullname");
 
   if (!group) {
     throw new ApiError(400, "group is not getting");
@@ -154,6 +152,10 @@ const getAllGroups = asyncHandler(async (req, res) => {
     "admin",
     "username avatar fullname"
   );
+
+  if (!groups) {
+    throw new ApiError(400, "unable to get groups ");
+  }
 
   return res
     .status(200)
@@ -237,7 +239,11 @@ const joinGroup = asyncHandler(async (req, res) => {
     throw new ApiError(500, "error while joining a group");
   }
 
-  return res.status(200).json(new ApiResponse(200, group, "joined the group"));
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, group, `joined the group ${group.name} successfully`)
+    );
 });
 
 const exitGroup = asyncHandler(async (req, res) => {
@@ -267,7 +273,7 @@ const exitGroup = asyncHandler(async (req, res) => {
   }
   return res
     .status(200)
-    .json(new ApiResponse(200, "left the group successfully"));
+    .json(new ApiResponse(200, {}, "left the group successfully"));
 });
 
 const getPostsByGroupId = asyncHandler(async (req, res) => {
@@ -290,7 +296,10 @@ const getPostsByGroupId = asyncHandler(async (req, res) => {
     throw new ApiError(400, "User does not have acess to this group");
   }
 
-  const posts = await Post.find({ groupId });
+  const posts = await Post.find({ groupId }).populate(
+    "authorId",
+    "avatar username fullname"
+  );
 
   return res
     .status(200)
@@ -300,7 +309,9 @@ const getPostsByGroupId = asyncHandler(async (req, res) => {
 const getGroupsByUserId = asyncHandler(async (req, res) => {
   const user = req.user;
 
-  const groups = await Group.find({ admin: user._id });
+  const groups = await Group.find({ admin: user._id }).select(
+    "avatar.url name members"
+  );
 
   if (!groups) {
     throw new ApiError(400, "Groups are unable to fetch");
@@ -308,7 +319,7 @@ const getGroupsByUserId = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, groups, "USer groups fetched successfully"));
+    .json(new ApiResponse(200, groups, "User groups fetched successfully"));
 });
 
 export {

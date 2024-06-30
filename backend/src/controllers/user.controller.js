@@ -12,7 +12,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
     const accessToken = await user.generateAccessToken();
-    console.log(accessToken);
+
     const refreshToken = user.generateRefreshToken();
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
@@ -21,7 +21,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
   } catch (error) {
     throw new ApiError(
       500,
-      "Something went wrong while generating referesh and access token"
+      "Something went wrong while generating refresh and access token"
     );
   }
 };
@@ -45,11 +45,14 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "User with email or username already exists");
   }
 
+  const userAvatar = `https://avatar.iran.liara.run/username?username=${username}`;
+
   const user = await User.create({
     username: username.toLowerCase(),
     fullname,
     email,
     password,
+    avatar: { url: userAvatar },
   });
 
   return res
@@ -134,7 +137,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "User logged Out"));
+    .json(new ApiResponse(200, {}, "User logged Out successfully"));
 });
 
 const updateProfile = asyncHandler(async (req, res) => {
@@ -193,7 +196,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, updateUser, "Profile Pic updated Sucessfully"));
+    .json(new ApiResponse(200, updateUser, "Profile Pic updated sucessfully"));
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
@@ -224,7 +227,7 @@ const toggleFollowUser = asyncHandler(async (req, res) => {
   const { followingId } = req.params;
 
   if (!isValidObjectId(followingId)) {
-    throw new ApiError("followingId is no valid");
+    throw new ApiError("followingId is not valid");
   }
 
   if (req.user._id.toString() == followingId) {
@@ -274,15 +277,18 @@ const toggleFollowUser = asyncHandler(async (req, res) => {
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const { userId } = req.params;
-
   if (!isValidObjectId(userId)) {
     throw new ApiError(400, "userId is not valid");
   }
 
-  const user = await User.findById(userId)
-    .populate("followers", "_id avatar username")
-    .populate("following", "_id avatar username")
+  const user = await User.findById({ _id: userId })
+    .populate("followers", "_id avatar username fullname")
+    .populate("following", "_id avatar username fullname")
     .populate("groups", "_id name avatar");
+
+  if (!user) {
+    throw new ApiError(400, "user unable to fetch");
+  }
 
   return res
     .status(200)
@@ -342,7 +348,9 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 });
 
 const getAllUsers = asyncHandler(async (req, res) => {
-  const users = await User.find().select("_id username fullname avatar.url");
+  const users = await User.find().select(
+    "_id username fullname avatar.url followers"
+  );
 
   if (!users) {
     throw new ApiError(400, "Unable to fetch all users");

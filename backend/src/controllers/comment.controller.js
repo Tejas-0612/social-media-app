@@ -14,7 +14,7 @@ const addComment = asyncHandler(async (req, res) => {
     throw new ApiError(400, "postId is not valid");
   }
 
-  if (!content) {
+  if (!content || content.trim() === "") {
     throw new ApiError(400, "content is required");
   }
 
@@ -33,6 +33,8 @@ const addComment = asyncHandler(async (req, res) => {
   if (!comment) {
     throw new ApiError(400, "unable to add comment");
   }
+
+  await Post.updateOne({ _id: post._id }, { $push: { comments: comment._id } });
 
   let message = {
     userId: post.authorId,
@@ -98,6 +100,11 @@ const deleteCommentById = asyncHandler(async (req, res) => {
   }
 
   await Comment.findByIdAndDelete(commentId);
+
+  await Post.updateOne(
+    { _id: comment.postId },
+    { $pull: { comments: comment._id } }
+  );
 
   return res.status(200).json(new ApiResponse(200, {}, "deleted the comment"));
 });
