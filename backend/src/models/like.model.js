@@ -11,7 +11,7 @@ const likeSchema = new Schema(
       enum: ["Post", "Comment"],
       required: true,
     },
-    postId: {
+    post: {
       type: Schema.Types.ObjectId,
       ref: "Post",
     },
