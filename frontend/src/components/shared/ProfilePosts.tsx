@@ -5,7 +5,7 @@ import GridPostList from "@/components/shared/GridPostList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetAllLikedPostsByUserId } from "@/lib/react-query/queriesAndMutations";
 import GridTextPostList from "./GridTextPostList";
-import { useUserContext } from "@/context/AuthContext";
+// import { useUserContext } from "@/context/AuthContext";
 
 type ProfilePostsProps = {
   userId: string | undefined;
