@@ -18,7 +18,7 @@ const ProfilePosts = ({ posts, isPostsPending }: ProfilePostsProps) => {
   const { data: likedPosts, isPending: isLikedPostPending } =
     useGetAllLikedPostsByUserId(userId!);
 
-  const { user: currentUser } = useUserContext();
+  // const { user: currentUser } = useUserContext();
 
   return (
     <Tabs defaultValue="photo" className="w-full">
