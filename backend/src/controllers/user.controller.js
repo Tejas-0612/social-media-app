@@ -96,9 +96,9 @@ const loginUser = asyncHandler(async (req, res) => {
   const options = {
     maxAge: 1 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: false,
+    secure: true,
     path: "/",
-    sameSite: "none",
+    SameSite: "None",
   };
 
   res.cookie("accessToken", accessToken, options);
