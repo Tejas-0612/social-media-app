@@ -94,26 +94,26 @@ const loginUser = asyncHandler(async (req, res) => {
   );
 
   const options = {
+    maxAge: 1 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: true,
-    sameSite: "None",
+    secure: false,
+    path: "/",
   };
 
-  return res
-    .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
-    .json(
-      new ApiResponse(
-        200,
-        {
-          user: loggedInUser,
-          accessToken,
-          refreshToken,
-        },
-        "user logged in successfully"
-      )
-    );
+  res.cookie("accessToken", accessToken, options);
+  res.cookie("refreshToken", refreshToken, options);
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        user: loggedInUser,
+        accessToken,
+        refreshToken,
+      },
+      "user logged in successfully"
+    )
+  );
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
