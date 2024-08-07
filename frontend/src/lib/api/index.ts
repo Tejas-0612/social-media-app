@@ -14,7 +14,8 @@ const backendUrl = import.meta.env.VITE_BACKEND_API_URL;
 export const getCurrentUser = async () => {
   try {
     const response = await axios.get(
-      `https://moments-sptw.onrender.com/api/v1/users/current-user/`
+      `${backendUrl}/api/v1/users/current-user/`,
+      { withCredentials: true }
     );
 
     return response.data;
@@ -44,8 +45,11 @@ export const signInAccount = async (user: {
 }) => {
   try {
     const response = await axios.post(
-      `https://moments-sptw.onrender.com/api/v1/users/login`,
-      user
+      `${backendUrl}/api/v1/users/login`,
+      user,
+      {
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (error) {
@@ -56,7 +60,13 @@ export const signInAccount = async (user: {
 
 export const signOutAccount = async () => {
   try {
-    const response = await axios.post(`${backendUrl}/api/v1/users/logout`);
+    const response = await axios.post(
+      `${backendUrl}/api/v1/users/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
     console.log("Error while signing out the user account: ", error);
@@ -66,7 +76,9 @@ export const signOutAccount = async () => {
 
 export const getAllUsers = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/users/all-users`);
+    const response = await axios.get(`${backendUrl}/api/v1/users/all-users`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("Error while getting all users: ", error);
@@ -77,7 +89,8 @@ export const getAllUsers = async () => {
 export const getUserById = async (userId: string) => {
   try {
     const response = await axios.get(
-      `${backendUrl}/api/v1/users/profile/${userId}`
+      `${backendUrl}/api/v1/users/profile/${userId}`,
+      { withCredentials: true }
     );
     return response.data.data;
   } catch (error) {
@@ -90,7 +103,9 @@ export const toggleFollowUser = async (followingId: string) => {
   if (!followingId) throw Error;
   try {
     const response = await axios.patch(
-      `${backendUrl}/api/v1/users/follow/${followingId}`
+      `${backendUrl}/api/v1/users/follow/${followingId}`,
+      {},
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -103,7 +118,8 @@ export const updateUserInfo = async (user: IUpdateUser) => {
   try {
     const response = await axios.patch(
       `${backendUrl}/api/v1/users/update-profile`,
-      user
+      user,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -134,7 +150,9 @@ export const updateUserAvatar = async (avatar: any) => {
 
 export const getAllGroups = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/group/`);
+    const response = await axios.get(`${backendUrl}/api/v1/group/`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("Error while getting all groups: ", error);
@@ -144,7 +162,9 @@ export const getAllGroups = async () => {
 
 export const getAllUserGroups = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/group/user/groups`);
+    const response = await axios.get(`${backendUrl}/api/v1/group/user/groups`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("Error while getting all user groups: ", error);
@@ -186,7 +206,8 @@ export const updatePost = async (post: IUpdatePost) => {
   try {
     const response = await axios.patch(
       `${backendUrl}/api/v1/post/update/${post._id}`,
-      post
+      post,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -198,7 +219,8 @@ export const updatePost = async (post: IUpdatePost) => {
 export const deletePost = async (postId: string) => {
   try {
     const response = await axios.delete(
-      `${backendUrl}/api/v1/post/delete/${postId}`
+      `${backendUrl}/api/v1/post/delete/${postId}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -210,7 +232,9 @@ export const deletePost = async (postId: string) => {
 export const getPostById = async (postId?: string) => {
   if (!postId) throw Error;
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/post/${postId}`);
+    const response = await axios.get(`${backendUrl}/api/v1/post/${postId}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("error while getting a post by Id:", postId);
@@ -220,7 +244,9 @@ export const getPostById = async (postId?: string) => {
 
 export const getAllPosts = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/post`);
+    const response = await axios.get(`${backendUrl}/api/v1/post`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("error while getting all posts", error);
@@ -232,7 +258,8 @@ export const getAllUserPosts = async (authorId: string) => {
   if (!authorId) throw Error;
   try {
     const response = await axios.get(
-      `${backendUrl}/api/v1/post/user/${authorId}`
+      `${backendUrl}/api/v1/post/user/${authorId}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -244,7 +271,9 @@ export const getAllUserPosts = async (authorId: string) => {
 export const togglePostLike = async (postId: string) => {
   try {
     const response = await axios.patch(
-      `${backendUrl}/api/v1/like/post/${postId}`
+      `${backendUrl}/api/v1/like/post/${postId}`,
+      {},
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -257,7 +286,8 @@ export const getAllLikedPostsByUserId = async (userId: string) => {
   if (!userId) throw Error;
   try {
     const response = await axios.get(
-      `${backendUrl}/api/v1/like/user/${userId}`
+      `${backendUrl}/api/v1/like/user/${userId}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -268,7 +298,9 @@ export const getAllLikedPostsByUserId = async (userId: string) => {
 
 export const getPostLikes = async (postId: string) => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/like/${postId}`);
+    const response = await axios.get(`${backendUrl}/api/v1/like/${postId}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("error while getting post likes", error);
@@ -289,7 +321,8 @@ export const addComment = async ({
       `${backendUrl}/api/v1/comment/add/${postId}`,
       {
         content,
-      }
+      },
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -300,7 +333,13 @@ export const addComment = async ({
 
 export const toggleSavePost = async (postId: string) => {
   try {
-    const response = await axios.patch(`${backendUrl}/api/v1/save/${postId}`);
+    const response = await axios.patch(
+      `${backendUrl}/api/v1/save/${postId}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
     console.log("Error getting while liking a post", error);
@@ -310,7 +349,9 @@ export const toggleSavePost = async (postId: string) => {
 
 export const userSavedPosts = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/save/`);
+    const response = await axios.get(`${backendUrl}/api/v1/save/`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("error while getting saved posts", error);
@@ -324,7 +365,8 @@ export const getUserNotifications = async (userId: string) => {
   try {
     console.log(userId);
     const response = await axios.get(
-      `${backendUrl}/api/v1/notification/user/${userId}`
+      `${backendUrl}/api/v1/notification/user/${userId}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -390,7 +432,9 @@ export const updateGroup = async (group: IUpdateGroup) => {
 
 export const getGroupById = async (groupId: string) => {
   try {
-    const response = await axios.get(`${backendUrl}/api/v1/group/${groupId}`);
+    const response = await axios.get(`${backendUrl}/api/v1/group/${groupId}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log("error while getting a group info:", error);
@@ -401,7 +445,8 @@ export const getGroupById = async (groupId: string) => {
 export const getGroupPosts = async (groupId: string) => {
   try {
     const response = await axios.get(
-      `${backendUrl}/api/v1/group/posts/${groupId}`
+      `${backendUrl}/api/v1/group/posts/${groupId}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -413,7 +458,9 @@ export const getGroupPosts = async (groupId: string) => {
 export const joinGroup = async (groupId: string) => {
   try {
     const response = await axios.patch(
-      `${backendUrl}/api/v1/group/join/${groupId}`
+      `${backendUrl}/api/v1/group/join/${groupId}`,
+      {},
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -425,7 +472,9 @@ export const joinGroup = async (groupId: string) => {
 export const exitGroup = async (groupId: string) => {
   try {
     const response = await axios.patch(
-      `${backendUrl}/api/v1/group/exit/${groupId}`
+      `${backendUrl}/api/v1/group/exit/${groupId}`,
+      {},
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
@@ -437,7 +486,8 @@ export const exitGroup = async (groupId: string) => {
 export const deleteGroup = async (groupId: string) => {
   try {
     const response = await axios.delete(
-      `${backendUrl}/api/v1/group/delete/${groupId}`
+      `${backendUrl}/api/v1/group/delete/${groupId}`,
+      { withCredentials: true }
     );
     return response.data;
   } catch (error) {
