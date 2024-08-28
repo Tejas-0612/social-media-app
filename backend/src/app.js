@@ -3,6 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 
+import job from "../cron.js";
+
 const app = express();
 
 dotenv.config({
@@ -15,6 +17,8 @@ app.use(
     credentials: true,
   })
 );
+
+job.start();
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
