@@ -6,7 +6,6 @@ import RootLayout from "./_root/RootLayout";
 import SignUpForm from "./_auth/forms/SignUpForm";
 import SignInForm from "./_auth/forms/SignInForm";
 
-import { Toaster } from "./components/ui/toaster";
 import Home from "./_root/pages/Home";
 import AllUsers from "./_root/pages/AllUsers";
 import AllGroups from "./_root/pages/AllGroups";
@@ -47,8 +46,6 @@ function App() {
           <Route path="/group/:groupId" element={<Group />} />
         </Route>
       </Routes>
-
-      <Toaster />
     </main>
   );
 }
