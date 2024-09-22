@@ -71,6 +71,7 @@ const UpdateProfile = () => {
     if (!updatedUser) {
       toast({
         title: `Update user failed. Please try again.`,
+        variant: "destructive",
       });
     }
 

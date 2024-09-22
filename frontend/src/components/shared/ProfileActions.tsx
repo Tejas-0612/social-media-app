@@ -34,7 +34,7 @@ const ProfileActions = ({ user, userId }: ProfileActionsProps) => {
         toast({ title: `${type} User` });
       }
     } catch (error: any) {
-      toast({ title: error.response.data.message });
+      toast({ title: error.response.data.message, variant: "destructive" });
     }
   };
 

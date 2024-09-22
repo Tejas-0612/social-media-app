@@ -51,25 +51,25 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
     setLikes(likesArray);
     await toggleLikePost(post._id);
 
-    toast({ title: "liked the post" });
+    toast({ title: "Liked the post." });
   };
 
   const handleSave = async () => {
     const toggleSavePost = await savePost(post._id);
     if (!toggleSavePost?.data) {
       setIsSaved(false);
-      toast({ title: "post unsaved" });
+      toast({ title: "Post unsaved." });
     } else {
       setIsSaved(true);
 
-      toast({ title: "post saved" });
+      toast({ title: "Post saved." });
     }
   };
 
   const handleShare = async () => {
     await navigator.clipboard.writeText(`/post/:${post._id}`);
 
-    toast({ title: "link copied to clipboard" });
+    toast({ title: "Link copied to clipboard." });
   };
 
   const isSavedPost = isUser && user.savedPosts.includes(post._id);

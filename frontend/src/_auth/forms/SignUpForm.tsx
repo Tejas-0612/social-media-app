@@ -47,7 +47,10 @@ const SignUpForm = () => {
       const newUser = await createUserAccount(user);
 
       if (!newUser) {
-        toast({ title: "Sign up failed. Please try again." });
+        toast({
+          title: "Sign-up failed. Please try again.",
+          variant: "destructive",
+        });
         return;
       }
 
@@ -58,7 +61,7 @@ const SignUpForm = () => {
 
       if (!session) {
         toast({
-          title: "Something went wrong. Please login your new account",
+          title: "Something went wrong. Please log in to your new account.",
         });
 
         navigate("/sign-in");
@@ -72,12 +75,15 @@ const SignUpForm = () => {
         form.reset();
         navigate("/");
       } else {
-        toast({ title: "Sign In failed. Please try again." });
+        toast({
+          title: "Sign-in failed. Please try again.",
+          variant: "destructive",
+        });
 
         return;
       }
     } catch (error: any) {
-      toast({ title: error.response.data.message });
+      toast({ title: error.response.data.message, variant: "destructive" });
     }
   };
 

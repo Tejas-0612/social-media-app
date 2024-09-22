@@ -50,7 +50,7 @@ const GroupActions = ({ group }: { group: IGroup }) => {
         }
       }
     } catch (error: any) {
-      toast({ title: error.response.data.message });
+      toast({ title: error.response.data.message, variant: "destructive" });
     }
   };
 
@@ -58,11 +58,11 @@ const GroupActions = ({ group }: { group: IGroup }) => {
     try {
       const response = await deleteGroup(group._id);
       if (response) {
-        toast({ title: `Deleted group '${group.name}' successfully` });
+        toast({ title: `Deleted group '${group.name}' successfully.` });
       }
       navigate(-1);
     } catch (error) {
-      toast({ title: "error while deleting a group" });
+      toast({ title: "Error while deleting a group.", variant: "destructive" });
       throw error;
     }
   };

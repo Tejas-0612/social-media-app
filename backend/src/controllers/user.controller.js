@@ -273,7 +273,7 @@ const toggleFollowUser = asyncHandler(async (req, res) => {
       new ApiResponse(
         200,
         user,
-        hasFollowed ? "unfollowed successfully" : "followed successfully"
+        hasFollowed ? "Unfollowed successfully." : "Followed successfully."
       )
     );
 });
@@ -357,11 +357,11 @@ const getAllUsers = asyncHandler(async (req, res) => {
   );
 
   if (!users) {
-    throw new ApiError(400, "Unable to fetch all users");
+    throw new ApiError(400, "Unable to fetch all users!");
   }
   return res
     .status(200)
-    .json(new ApiResponse(200, users, "All Users fetched successfully"));
+    .json(new ApiResponse(200, users, "All Users fetched successfully."));
 });
 
 export {

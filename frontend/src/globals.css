@@ -109,6 +109,10 @@
     background: #7878a3;
   }
 
+  .toaster {
+    @apply flex flex-col gap-3  text-white fixed w-[320px]  z-[10000] top-4 h-16 lg:bottom-0 slide-in-from-top-4  !important;
+  }
+
   .page-title {
     @apply h3-bold md:h2-bold text-left w-full  flex gap-2 invert-white;
   }

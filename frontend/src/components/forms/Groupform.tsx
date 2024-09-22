@@ -63,9 +63,10 @@ const Groupform = ({ group, action }: GroupFormProps) => {
       if (!updatedGroup) {
         toast({
           title: `${action} Group failed. Please try again.`,
+          variant: "destructive",
         });
       } else {
-        toast({ title: `Group ${action}d sucessfully` });
+        toast({ title: `Group ${action}d sucessfully.` });
       }
 
       navigate(`/group/${group._id}`);
@@ -81,9 +82,10 @@ const Groupform = ({ group, action }: GroupFormProps) => {
       if (!newGroup) {
         toast({
           title: `${action} Group failed. Please try again.`,
+          variant: "destructive",
         });
       } else {
-        toast({ title: `Group ${action}d sucessfully` });
+        toast({ title: `Group ${action}d sucessfully.` });
       }
 
       navigate(`/group/${newGroup.data._id}`);

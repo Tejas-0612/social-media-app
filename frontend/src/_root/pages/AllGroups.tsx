@@ -24,6 +24,7 @@ const AllGroups = () => {
     toast({
       title:
         "Sorry, we were unable to load the groups. Please try again later.",
+      variant: "destructive",
     });
   }
 

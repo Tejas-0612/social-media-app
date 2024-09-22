@@ -9,10 +9,10 @@ const DeletePost = ({ postId }: { postId: string }) => {
   const handleDeletePost = async () => {
     try {
       await deletePost(postId);
-      toast({ title: "Deleted post successfully" });
+      toast({ title: "Deleted post successfully." });
       navigate("/");
     } catch (error) {
-      toast({ title: "Error while deleting post" });
+      toast({ title: "Error while deleting a post.", variant: "destructive" });
     }
   };
 

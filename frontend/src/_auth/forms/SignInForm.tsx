@@ -39,7 +39,10 @@ const SignInForm = () => {
       const session = await signInAccount(user);
 
       if (!session) {
-        toast({ title: "Login failed.Please try again" });
+        toast({
+          title: "Login failed. Please try again.",
+          variant: "destructive",
+        });
         return;
       }
 
@@ -51,10 +54,13 @@ const SignInForm = () => {
 
         navigate("/");
       } else {
-        toast({ title: "Login failed.Please try again" });
+        toast({
+          title: "Login failed. Please try again.",
+          variant: "destructive",
+        });
       }
     } catch (error: any) {
-      toast({ title: error.response.data.message });
+      toast({ title: error.response.data.message, variant: "destructive" });
     }
   };
 

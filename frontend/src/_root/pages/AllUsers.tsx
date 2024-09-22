@@ -18,6 +18,7 @@ const AllUsers = () => {
   if (isErrorCreators) {
     toast({
       title: "Sorry, we were unable to load the users. Please try again later.",
+      variant: "destructive",
     });
   }
 
