@@ -4,6 +4,7 @@ import {
   addComment,
   createGroup,
   createPost,
+  createStory,
   createUserAccount,
   deleteGroup,
   deletePost,
@@ -11,6 +12,7 @@ import {
   getAllGroups,
   getAllLikedPostsByUserId,
   getAllPosts,
+  getAllStories,
   getAllUserGroups,
   getAllUserPosts,
   getAllUsers,
@@ -36,6 +38,7 @@ import { QUERY_KEYS } from "./querykeys";
 import {
   INewGroup,
   INewPost,
+  INewStory,
   INewUser,
   IUpdateGroup,
   IUpdatePost,
@@ -337,5 +340,20 @@ export const useExitGroup = () => {
 export const useDeleteGroup = () => {
   return useMutation({
     mutationFn: (groupId: string) => deleteGroup(groupId),
+  });
+};
+
+// Story Queries
+
+export const useCreateStory = () => {
+  return useMutation({
+    mutationFn: (story: INewStory) => createStory(story),
+  });
+};
+
+export const useGetAllStories = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_ALL_STORIES],
+    queryFn: () => getAllStories(),
   });
 };

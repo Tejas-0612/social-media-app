@@ -109,6 +109,15 @@
     background: #7878a3;
   }
 
+  .hidden-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .toaster {
     @apply flex flex-col gap-3  text-white fixed w-[320px]  z-[10000] top-4 h-16 lg:bottom-0 slide-in-from-top-4  !important;
   }
@@ -164,11 +173,11 @@
 
   /* Home */
   .home-container {
-    @apply flex flex-col md:flex-1 items-center gap-10 py-10 px-4 md:px-8 lg:p-14 overflow-y-scroll custom-scrollbar;
+    @apply flex flex-col flex-1 gap-10 py-8  px-4 md:px-8 lg:px-14 overflow-y-scroll custom-scrollbar;
   }
 
   .home-posts {
-    @apply max-w-screen-sm flex flex-col items-center w-full gap-6 md:gap-9;
+    @apply max-w-screen-sm flex flex-col mx-auto w-full gap-6 md:gap-9;
   }
 
   .home-right-con {

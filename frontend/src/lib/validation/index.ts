@@ -54,3 +54,7 @@ export const GroupValidation = z.object({
   avatar: z.any(),
   coverImage: z.any(),
 });
+
+export const StoryValidation = z.object({
+  media: z.any(),
+});

@@ -163,3 +163,21 @@ export type IComment = {
   content: string;
   createdAt: string;
 };
+
+export type INewStory = {
+  media: string;
+};
+
+export type IStory = {
+  _id: string;
+  user: {
+    avatar: {
+      url: string;
+    };
+    _id: string;
+    username: string;
+    fullname: string;
+  };
+  mediaUrl: string;
+  mediaType: string;
+};

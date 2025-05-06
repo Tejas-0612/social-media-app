@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   INewGroup,
   INewPost,
+  INewStory,
   INewUser,
   IUpdateGroup,
   IUpdatePost,
@@ -492,6 +493,44 @@ export const deleteGroup = async (groupId: string) => {
     return response.data;
   } catch (error) {
     console.log("error while deleting a group", error);
+    throw error;
+  }
+};
+
+export const createStory = async (story: INewStory) => {
+  try {
+    const formData = new FormData();
+    formData.append("media", story.media[0]);
+
+    const response = await axios.post(
+      `${backendUrl}/api/v1/stories/create`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log("error while creating a story", error);
+    throw error;
+  }
+};
+
+export const getAllStories = async () => {
+  try {
+    const response = await axios.get(
+      `${backendUrl}/api/v1/stories/get-stories`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    console.log("Error while getting all stories: ", error);
     throw error;
   }
 };

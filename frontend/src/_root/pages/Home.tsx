@@ -10,6 +10,7 @@ import { useUserContext } from "@/context/AuthContext";
 import Loader from "@/components/shared/Loader";
 import DisplayCard from "@/components/shared/DisplayCard";
 import PostCard from "@/components/shared/PostCard";
+import StoryFeed from "@/components/shared/StoryFeed";
 
 const Home = () => {
   const {
@@ -33,25 +34,27 @@ const Home = () => {
   }
 
   return (
-    <div className="flex flex-1">
-      <div className="home-container">
-        <div className="home-posts">
-          <h2 className="page-title">
-            <img src={"/assets/icons/home.svg"} width={36} height={36} />
-            Home Feed
-          </h2>
-
-          {isPostsPending && !posts ? (
-            <Loader />
-          ) : (
-            <ul className="flex flex-col flex-1 gap-9 w-full ">
-              {posts.data.map((post: IPost) => (
-                <li key={post._id} className="flex justify-center w-full">
-                  <PostCard post={post} />
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className="w-full flex flex-col md:flex-row flex-1">
+      <div className="w-[100%] overflow-y-scroll custom-scrollbar md:flex-1">
+        <StoryFeed />
+        <div className="home-container ">
+          <div className="home-posts">
+            <h2 className="page-title">
+              <img src={"/assets/icons/home.svg"} width={36} height={36} />
+              Home Feed
+            </h2>
+            {isPostsPending && !posts ? (
+              <Loader />
+            ) : (
+              <ul className="flex flex-col flex-1 gap-9 w-full ">
+                {posts.data.map((post: IPost) => (
+                  <li key={post._id} className="flex justify-center w-full">
+                    <PostCard post={post} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
 

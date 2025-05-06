@@ -21,4 +21,7 @@ export enum QUERY_KEYS {
   // Group Keys
   GET_GROUP_BY_ID = "getGroupById",
   GET_GROUP_POSTS = "getGroupPosts",
+
+  // Story Keys
+  GET_ALL_STORIES = "getAllStories",
 }
