@@ -89,7 +89,7 @@ const StoryViewer: React.FC<StoryViewerProps> = ({ storyData, onClose }) => {
 
       {/* Right tap area */}
       <div
-        className="absolute right-0 top-0 bottom-0 w-1/2 flex justify-center ml-28 items-center"
+        className="absolute right-0 top-0 bottom-0 w-1/2 flex justify-center mr-28  items-center"
         onClick={handleNext}
       >
         <img
