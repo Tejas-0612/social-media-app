@@ -22,7 +22,7 @@ import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 
 const SignInForm = () => {
   const navigate = useNavigate();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const { checkAuthUser } = useUserContext();
 
   const { mutateAsync: signInAccount, isPending } = useSignInAccount();
 
@@ -112,7 +112,7 @@ const SignInForm = () => {
           />
 
           <Button type="submit" className="shad-button_primary">
-            {isPending || isUserLoading ? (
+            {isPending ? (
               <div className="flex flex-center gap-2">
                 <Loader2 />
                 Loading...
